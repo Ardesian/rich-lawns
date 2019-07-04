@@ -28,6 +28,14 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
+gem 'sidekiq'
+gem 'sidekiq-cron'
+gem 'exception_notification'
+gem 'slack-notifier'
+gem 'autoprefixer-rails'
+gem 'font-awesome-rails'
+gem 'rest-client'
+gem 'kaminari'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -35,6 +43,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'annotate'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
@@ -59,15 +68,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # OLD
 # gem 'redis'
 # gem 'redis-namespace'
-# gem 'sidekiq'
-# gem 'sidekiq-cron'
-# gem 'autoprefixer-rails'
-# gem 'font-awesome-rails'
 # gem 'colorize'
 # gem 'twilio-ruby', '~> 4.11.1'
-# gem 'rest-client'
-# gem 'exception_notification'
-# gem 'slack-notifier'
 
 # gem 'httparty'
 # gem 'therubyracer'
@@ -87,7 +89,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'poltergeist'
 # gem 'launchy'
 # gem 'numbers_in_words'
-# gem 'kaminari'
 # gem 'oily_png'
 # gem 'chroma'
 # gem 'acts_as_paranoid', '~> 0.5.0'
@@ -96,7 +97,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # group :development, :test do
 #   gem 'listen'
-  # gem 'annotate'
   # gem 'rails_real_favicon'
   # gem 'binding_of_caller'
   # gem 'pry-rails'
