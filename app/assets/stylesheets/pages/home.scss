@@ -1,0 +1,59 @@
+.ctr-static.act-home {
+  margin: 0;
+  background: $grass-green;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: white;
+
+  font-family: 'CodenameCoder-Bold', monospace;
+
+  .homepage-wrapper {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+
+    .homepage-container {
+      margin-bottom: 100px;
+      text-align: center;
+
+      h1 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 64px;
+
+        text-transform: uppercase;
+      }
+      .homepage-btns {
+        padding-top: 10px;
+
+        a {
+          display: inline-block;
+          position: relative;
+          transition: all 0.17s ease-out;
+          margin: 0 5px;
+
+          border: 2px solid blue;
+          width: 40px;
+
+          height: 40px;
+
+          color: white;
+          font-size: 28px;
+          line-height: 40px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  #full-page-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+}

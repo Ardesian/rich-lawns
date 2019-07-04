@@ -1,15 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
   <head>
-    <title>Rich</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
+    <title><%= content_for(:title) || "Rich Lawn's" %></title>
+    <% description = content_for(:description) || "" %>
+    <meta name="description" content="<%= description %>">
+    <meta name="uptime" content="true">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= yield :meta %>
+    <%= yield :head_before_scripts %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <%= yield :head %>
+    <% if content_for? :favicon %>
+      <%= yield :favicon %>
+    <% else %>
+      <%#= render 'favicon' %>
+    <% end %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
   </head>
+  <body class="ctr-<%= controller_name %> act-<%= action_name %> <%= content_for :body_classes %>">
 
-  <body>
+    <%= render 'layouts/flashes' %>
+    <%= yield :modals %>
     <%= yield %>
+
+    <% if content_for? :after_js %>
+      <%= yield :after_js %>
+    <% end %>
   </body>
 </html>
