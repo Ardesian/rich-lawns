@@ -11,6 +11,11 @@ module Rich
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    config.secret_key_base = ENV["RICH_SECRET"]
+    config.active_record.belongs_to_required_by_default = true
+    config.assets.quiet = true
+    config.assets.paths << Rails.root.join("app", "assets", "fonts")
+
     config.generators.javascript_engine = :js
 
     # Settings in config/environments/* take precedence over those specified here.
