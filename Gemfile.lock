@@ -171,6 +171,8 @@ GEM
     rb-inotify (0.10.0)
       ffi (~> 1.0)
     redis (4.1.2)
+    redis-namespace (1.6.0)
+      redis (>= 3.0.4)
     regexp_parser (1.5.1)
     rest-client (2.0.2)
       http-cookie (>= 1.0.2, < 2.0)
@@ -256,6 +258,8 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 3.11)
   rails (~> 5.2.1, >= 5.2.1.1)
+  redis
+  redis-namespace
   rest-client
   sass-rails (~> 5.0)
   selenium-webdriver

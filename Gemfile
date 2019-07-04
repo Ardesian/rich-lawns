@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+gem 'redis'
+gem 'redis-namespace'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sidekiq'
@@ -66,8 +68,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 
 # OLD
-# gem 'redis'
-# gem 'redis-namespace'
 # gem 'colorize'
 # gem 'twilio-ruby', '~> 4.11.1'
 
