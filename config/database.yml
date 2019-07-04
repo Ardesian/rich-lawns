@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: rich_production
-  username: rich
+  username: rails
   password: <%= ENV['RICH_DATABASE_PASSWORD'] %>
