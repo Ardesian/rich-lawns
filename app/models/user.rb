@@ -7,7 +7,7 @@
 #  encrypted_password     :string           default(""), not null
 #  name                   :string
 #  phone                  :string
-#  role                   :integer          default("unemployed")
+#  role                   :integer          default("customer")
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
 #  remember_created_at    :datetime
@@ -22,8 +22,9 @@
 
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
-
   include Moddable
+
+  has_many :service_addresses
 
   def see!
     # last logged in at NOW

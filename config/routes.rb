@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root "static#home"
 
   resources :emails, except: [:destroy, :edit]
+  resources :service_addresses, except: [:show, :index]
 
   scope :webhooks do
     post :email, controller: :webhooks
