@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_191654) do
+ActiveRecord::Schema.define(version: 2019_07_05_211129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,39 @@ ActiveRecord::Schema.define(version: 2019_07_05_191654) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sent_by_id"], name: "index_emails_on_sent_by_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "ip"
+    t.string "country_code"
+    t.string "country_name"
+    t.string "region_code"
+    t.string "region_name"
+    t.string "city"
+    t.string "zip_code"
+    t.string "time_zone"
+    t.string "metro_code"
+    t.float "latitude"
+    t.float "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "log_trackers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.integer "location_id"
+    t.string "url"
+    t.string "params"
+    t.string "http_method"
+    t.string "ip_address"
+    t.string "user_agent"
+    t.integer "ip_count"
+    t.text "headers"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_log_trackers_on_location_id"
+    t.index ["user_id"], name: "index_log_trackers_on_user_id"
   end
 
   create_table "service_addresses", force: :cascade do |t|
