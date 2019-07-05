@@ -13,6 +13,10 @@ $flash-alert-bg: #B21500;
 // $facebook-blue: #3B5998;
 // $github-black: black;
 
+$zindex: (
+  flash: 1000
+);
+
 // map-get($pri, l1)
 $pri: (
   l21: #FFFFFF,
