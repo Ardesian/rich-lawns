@@ -1,6 +1,3 @@
-$grass-green: #507445;
-
-
 $danger: #F6433D;
 $grey-blue: #6481A1;
 $grey-light: #ECF0F1;
@@ -16,15 +13,49 @@ $flash-alert-bg: #B21500;
 // $facebook-blue: #3B5998;
 // $github-black: black;
 
-$blue-l20: #F6FAFF;
-$blue-l5: #DFEDFE;
-$blue-l4: #BEDBFC;
-$blue-l3: #9ECAFB;
-$blue-l2: #7EB8F9;
-$blue-l1: #5DA6F8;
-$base-blue: #3D94F6;
-$blue-d1: #337BCD;
-$blue-d2: #2963A4;
-$blue-d3: #1F4A7B;
-$blue-d4: #143152;
-$blue-d5: #0A1929;
+// map-get($pri, l1)
+$pri: (
+  l21: #FFFFFF,
+  l20: #F7F8F6,
+  l19: #EEF2ED,
+  l18: #E6EBE4,
+  l17: #DEE5DC,
+  l16: #D5DED3,
+  l15: #CDD7CA,
+  l14: #C5D1C1,
+  l13: #BCCAB8,
+  l12: #B4C3AF,
+  l11: #ACBDA6,
+  l10: #A3B69E,
+  l9:  #9BB095,
+  l8:  #93A98C,
+  l7:  #8AA283,
+  l6:  #829C7A,
+  l5:  #7A9571,
+  l4:  #718E68,
+  l3:  #698860,
+  l2:  #618157,
+  l1:  #587B4E,
+  base:  #507445,
+  d1:  #4C6E42,
+  d2:  #48693E,
+  d3:  #45633B,
+  d4:  #415E38,
+  d5:  #3D5835,
+  d6:  #395331,
+  d7:  #354D2E,
+  d8:  #32482B,
+  d9:  #2E4227,
+  d10: #2A3D24,
+  d11: #263721,
+  d12: #22321E,
+  d13: #1E2C1A,
+  d14: #1B2717,
+  d15: #172114,
+  d16: #131C10,
+  d17: #0F160D,
+  d18: #0B110A,
+  d19: #080B07,
+  d20: #040603,
+  d21: #000000
+)

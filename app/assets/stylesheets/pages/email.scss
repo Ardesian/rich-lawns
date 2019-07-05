@@ -39,7 +39,7 @@
       line-height: 30px;
       text-align: center;
 
-      &:hover { background-color: $base-blue; }
+      &:hover { background-color: map-get($pri, base); }
     }
   }
 
@@ -171,7 +171,7 @@
     }
     .email-actions {
       margin: 0 auto;
-      border-bottom: 1px solid $blue-d1;
+      border-bottom: 1px solid map-get($pri, d1);
       background: #F9F9F9;
       padding: 10px;
       text-align: center;
@@ -191,7 +191,7 @@
       font-size: 14px;
 
       &:hover {
-        background-color: $blue-l5;
+        background-color: map-get($pri, l5);
       }
     }
     .email-selected {

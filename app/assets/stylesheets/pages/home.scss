@@ -1,6 +1,6 @@
 .ctr-static.act-home {
   margin: 0;
-  background: $grass-green;
+  background: map-get($pri, base);
   width: 100%;
   height: 100%;
   overflow: hidden;

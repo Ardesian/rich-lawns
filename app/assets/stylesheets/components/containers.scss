@@ -1,0 +1,74 @@
+.skinny-container {
+  margin: 0 auto;
+  width: 700px;
+  max-width: 100%;
+}
+
+.central-container {
+  margin-top: 30px;
+  box-shadow: 3px 3px 10px $grey-blue;
+  border-radius: 10px;
+  background: map-get($pri, l5);
+  overflow: hidden;
+  font-family: Arial;
+
+  .container-title {
+    background: map-get($pri, base);
+    padding: 20px;
+    color: white;
+    font-size: 32px;
+
+    .subtitle {
+      font-size: 14px;
+    }
+  }
+  .content {
+    box-sizing: border-box;
+    padding: 20px;
+    padding-bottom: 5px;
+    width: 100%;
+
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+  .cell {
+    display: block;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background: white;
+    padding: 15px;
+    width: 100%;
+    color: $text-color;
+    text-decoration: none;
+
+    label { color: darken($grey-blue, 15%); }
+  }
+  a.cell {
+    &:hover {
+      background: map-get($pri, l15);
+    }
+  }
+  // .split-fields {
+  //   font-size: 0;
+  //
+  //   .form-field {
+  //     display: inline-block;
+  //     box-sizing: border-box;
+  //     width: 50%;
+  //     font-size: 16px;
+  //   }
+  // }
+
+  // .form-submission {
+  //   margin-bottom: 15px;
+  //   text-align: center;
+  // }
+  // .helpful-links {
+  //   margin-bottom: 10px;
+  //   font-size: 14px;
+  //   text-align: center;
+  //   a { display: block; }
+  // }
+}
