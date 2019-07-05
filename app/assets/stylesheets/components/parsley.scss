@@ -1,0 +1,40 @@
+.parsley-errors-list {
+  display: none;
+}
+
+.parsley-error {
+  background: $parsley-error-color;
+}
+
+.error-tooltip-wrapper {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: map-get($zindex, popup);
+  text-align: center;
+  white-space: normal;
+
+  .error-tooltip {
+    display: inline-block;
+    border-radius: 8px;
+    background: black;
+    padding: 10px;
+    width: auto;
+    max-width: 600px;
+    color: white;
+
+    &:before {
+      display: block;
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      margin-left: -5px;
+      border-right: 10px solid transparent;
+      border-bottom: 10px solid black;
+      border-left: 10px solid transparent;
+      width: 0;
+      height: 0;
+      content: "";
+    }
+  }
+}
