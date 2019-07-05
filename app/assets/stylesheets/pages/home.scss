@@ -32,21 +32,17 @@
       .homepage-btns {
         padding-top: 10px;
 
-        a {
-          display: inline-block;
-          position: relative;
-          transition: all 0.17s ease-out;
-          margin: 0 5px;
+        .btn {
+          box-shadow: inset 0px 1px 0px 0px lighten(orange, 15%);
+          border: 1px solid lighten(orange, 15%);
+          background: linear-gradient(to bottom, orange 25%, darken(orange, 10%) 100%);
+          background-color: orange;
 
-          border: 2px solid blue;
-          width: 40px;
-
-          height: 40px;
-
-          color: white;
-          font-size: 28px;
-          line-height: 40px;
-          text-align: center;
+          &:hover {
+            cursor: pointer;
+            background: linear-gradient(to bottom, darken(orange, 10%) 5%, orange 100%);
+            background-color: darken(orange, 50%);
+          }
         }
       }
     }
