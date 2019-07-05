@@ -6,9 +6,9 @@
 
 .central-container {
   margin-top: 30px;
-  box-shadow: 3px 3px 10px $grey-blue;
+  box-shadow: 3px 3px 10px map-get($pri, d5);
   border-radius: 10px;
-  background: map-get($pri, l5);
+  background: map-get($pri, l15);
   overflow: hidden;
   font-family: Arial;
 
@@ -47,7 +47,7 @@
   }
   a.cell {
     &:hover {
-      background: map-get($pri, l15);
+      background: map-get($pri, l20);
     }
   }
   // .split-fields {
