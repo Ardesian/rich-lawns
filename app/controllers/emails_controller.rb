@@ -14,14 +14,12 @@ class EmailsController < ApplicationController
   end
 
   def new
-    @email = Email.new(email_params)
-    # @email = current_user.sent_emails.new(email_params)
-    @email.from_user ||= current_user.email.in?(Email.registered_domains) ? current_user.email : "#{(current_user.username.presence || 'contact')}@ardesian.com"
+    @email = current_user.sent_emails.new(email_params)
+    @email.from_user ||= current_user.email.in?(Email.registered_domains) ? current_user.email : "#{(current_user.username.presence || 'contact')}@rich-lawns.com"
   end
 
   def create
-    # @email = current_user.sent_emails.new(email_params)
-    @email = Email.new(email_params)
+    @email = current_user.sent_emails.new(email_params)
     @email.set_send_values
 
     if @email.errors.none? && @email.save
