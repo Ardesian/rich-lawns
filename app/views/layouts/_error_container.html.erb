@@ -1,9 +1,18 @@
-<% if resource.try(:errors).try(:any?) %>
-  <div class="error-container">
+<% resource_class ||= nil %>
+<% error_messages ||= resource.errors.full_messages %>
+<% error_title ||= "#{pluralize(error_messages.count, 'error')} prohibited this #{(resource_class || resource.class).table_name.singularize.titleize} from being saved:" %>
+
+<% if error_messages.any? %>
+  <div class="fields_with_errors" id="error_explanation">
+    <h4><%= error_title %></h4>
     <ul>
-      <% resource.errors.full_messages.each do |error| %>
-        <li><%= error %></li>
+      <% error_messages.each do |message| %>
+        <li><%= message %></li>
       <% end %>
     </ul>
   </div>
 <% end %>
+
+<%# Examples: Either include a resource that responds to `resource.errors.full_messages` or include custom messages and a title. %>
+<%#= render partial: "layouts/error_container", locals: { resource: @user } %>
+<%#= render partial: "layouts/error_container", locals: { error_messages: @care_plan_json[:errors] || [], error_title: "Failed to deliver Care Plan:" } %>

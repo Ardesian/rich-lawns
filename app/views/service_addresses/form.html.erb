@@ -3,32 +3,33 @@
     <div class="container-title">Service Address</div>
     <div class="content">
       <%= form_for @service_address, data: parsley(:validate, trigger: :blur) do |f| %>
+        <%= render partial: "layouts/error_container", locals: { resource: @service_address } %>
         <div class="cell">
 
           <div class="form-field">
-            <%= f.label :name, "Address Name (Optional)" %><br />
+            <%= f.label :name, "Address Name (Optional)" %>
             <%= f.text_field :name %>
           </div>
 
           <div class="form-field">
-            <%= f.label :address, "Street Address" %><br />
+            <%= f.label :address, "Street Address" %>
             <%= f.text_field :address, data: parsley(:required) %>
           </div>
 
           <div class="inline-fields">
             <div class="form-field">
-              <%= f.label :city %><br />
+              <%= f.label :city %>
               <%= f.text_field :city, data: parsley(:required) %>
             </div>
 
             <div class="form-field" style="width: 100px;">
-              <%= f.label :zip %><br />
+              <%= f.label :zip %>
               <%= f.text_field :zip, data: parsley(:required) %>
             </div>
           </div>
 
           <div class="form-field">
-            <%= f.label :frequency %><br />
+            <%= f.label :frequency %>
             <%= f.select :frequency, ServiceAddress.select_frequencies, data: parsley(:required) %>
           </div>
 

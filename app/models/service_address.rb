@@ -17,6 +17,8 @@
 class ServiceAddress < ApplicationRecord
   belongs_to :user
 
+  validates :address, :city, :zip, presence: true
+
   enum frequency: {
     by_request_only: 0,
     daily:           1,
