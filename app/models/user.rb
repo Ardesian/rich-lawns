@@ -25,7 +25,12 @@ class User < ApplicationRecord
   include Moddable
 
   has_many :service_addresses
+  has_many :stripe_cards
   has_many :sent_emails, class_name: "Email", foreign_key: :sent_by_id, dependent: :destroy
+
+  def default_payment_card
+    stripe_cards.default.first
+  end
 
   def see!
     # last logged in at NOW

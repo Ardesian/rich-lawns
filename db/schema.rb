@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_211129) do
+ActiveRecord::Schema.define(version: 2019_07_05_213336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,40 @@ ActiveRecord::Schema.define(version: 2019_07_05_211129) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_service_addresses_on_user_id"
+  end
+
+  create_table "service_charges", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "service_address_id"
+    t.bigint "stripe_charge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_address_id"], name: "index_service_charges_on_service_address_id"
+    t.index ["stripe_charge_id"], name: "index_service_charges_on_stripe_charge_id"
+    t.index ["user_id"], name: "index_service_charges_on_user_id"
+  end
+
+  create_table "stripe_cards", force: :cascade do |t|
+    t.bigint "user_id"
+    t.boolean "default"
+    t.string "customer_id"
+    t.string "last_4"
+    t.integer "exp_month"
+    t.integer "exp_year"
+    t.string "customer_error"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_stripe_cards_on_user_id"
+  end
+
+  create_table "stripe_charges", force: :cascade do |t|
+    t.bigint "stripe_card_id"
+    t.integer "cost_in_pennies"
+    t.string "payment_error"
+    t.datetime "charged_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stripe_card_id"], name: "index_stripe_charges_on_stripe_card_id"
   end
 
   create_table "users", force: :cascade do |t|
