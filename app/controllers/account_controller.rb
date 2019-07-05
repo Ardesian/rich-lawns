@@ -2,7 +2,7 @@ class AccountController < ApplicationController
   before_action :authenticate_user
 
   def show
-    @service_addresses = current_user.service_addresses.order(:id)
+    @service_addresses = current_user.service_addresses.current.order(:id)
   end
 
   def edit

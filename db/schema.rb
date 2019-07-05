@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_191654) do
     t.string "zip"
     t.integer "frequency"
     t.datetime "last_service"
+    t.datetime "removed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_service_addresses_on_user_id"

@@ -10,6 +10,8 @@ class CreateServiceAddress < ActiveRecord::Migration[5.2]
       t.integer :frequency
       t.datetime :last_service
 
+      t.datetime :removed_at
+
       t.timestamps
     end
   end

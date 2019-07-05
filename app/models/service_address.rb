@@ -10,6 +10,7 @@
 #  zip          :string
 #  frequency    :integer
 #  last_service :datetime
+#  removed_at   :datetime
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #
@@ -18,6 +19,8 @@ class ServiceAddress < ApplicationRecord
   belongs_to :user
 
   validates :address, :city, :zip, presence: true
+
+  scope :current, -> { where(removed_at: nil) }
 
   enum frequency: {
     by_request_only: 0,
