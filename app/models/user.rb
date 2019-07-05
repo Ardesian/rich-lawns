@@ -24,4 +24,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
 
   include Moddable
+
+  def see!
+    # last logged in at NOW
+  end
 end

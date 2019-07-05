@@ -1,5 +1,5 @@
 class EmailsController < ApplicationController
-  # before_action :authorize_admin
+  before_action :authenticate_admin
 
   def index
     # FIXME: Filter this by user unless admin?
