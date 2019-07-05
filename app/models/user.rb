@@ -25,6 +25,7 @@ class User < ApplicationRecord
   include Moddable
 
   has_many :service_addresses
+  has_many :sent_emails, class_name: "Email", foreign_key: :sent_by_id, dependent: :destroy
 
   def see!
     # last logged in at NOW
