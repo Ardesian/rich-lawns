@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_191654) do
   end
 
   create_table "service_addresses", force: :cascade do |t|
+    t.string "token"
     t.bigint "user_id"
     t.string "name"
     t.string "address"

@@ -51,6 +51,6 @@ class ServiceAddressesController < ApplicationController
 
   def set_service_address
     return unless params[:id].present?
-    @service_address = current_user.service_addresses.current.find(params[:id])
+    @service_address = current_user.service_addresses.current.find_by!(token: params[:id])
   end
 end

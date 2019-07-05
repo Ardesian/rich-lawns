@@ -3,6 +3,7 @@
 # Table name: service_addresses
 #
 #  id           :bigint           not null, primary key
+#  token        :string
 #  user_id      :bigint
 #  name         :string
 #  address      :string
@@ -16,6 +17,7 @@
 #
 
 class ServiceAddress < ApplicationRecord
+  include Tokenable
   belongs_to :user
 
   validates :address, :city, :zip, presence: true
