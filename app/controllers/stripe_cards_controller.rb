@@ -16,7 +16,7 @@ class StripeCardsController < ApplicationController
     @stripe_card = current_user.stripe_cards.current.new(stripe_card_params)
 
     if @stripe_card.save
-      redirect_to account_path
+      redirect_to stripe_cards_path
     else
       render :form
     end
@@ -28,7 +28,7 @@ class StripeCardsController < ApplicationController
 
   def update
     if @stripe_card.update(stripe_card_params)
-      redirect_to account_path
+      redirect_to stripe_cards_path
     else
       render :form
     end
@@ -36,9 +36,9 @@ class StripeCardsController < ApplicationController
 
   def destroy
     if @stripe_card.update(removed_at: Time.current)
-      redirect_to account_path
+      redirect_to stripe_cards_path
     else
-      redirect_to account_path, alert: "Something went wrong."
+      redirect_to stripe_cards_path, alert: "Something went wrong."
     end
   end
 
@@ -47,7 +47,8 @@ class StripeCardsController < ApplicationController
   def stripe_card_params
     params.require(:stripe_card).permit(
       :name,
-      :stripeToken
+      :stripeToken,
+      :default
     )
   end
 

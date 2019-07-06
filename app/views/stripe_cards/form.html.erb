@@ -73,6 +73,16 @@
             </div>
           <% end %>
 
+          <div class="form-field">
+            <div class="checkbox-wrapper">
+              <%= f.check_box :default %>
+              <%= f.label :default do %>
+                <div class="checkbox-placeholder"></div>
+                Use this card as the default payment?
+              <% end %>
+            </div>
+          </div>
+
           <div class="text-center">
             <div class="actions">
               <%= f.submit "Save" %>
