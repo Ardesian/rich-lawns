@@ -2,17 +2,25 @@
   <div class="central-container">
     <div class="container-title">Account</div>
     <div class="content">
+      <div class="content-label">Account Details</div>
+      <%= link_to edit_account_path, class: :cell do %>
+        <h3><%= current_user.name %></h3>
+        <small>Contact: <%= current_user.email %> | <%= current_user.phone %></small> <br>
+        <small><i>(Click to edit)</i></small>
+      <% end %>
+      <div class="content-label">Billing Information</div>
       <%= link_to @stripe_card.present? ? stripe_cards_path : new_stripe_card_path, class: :cell do %>
-        <h3>Billing Information <small>(Click to edit)</small></h3>
         <% if @stripe_card.present? %>
           <% if @stripe_card.name.present? %>
             <h3><%= @stripe_card.name %></h3>
           <% end %>
+          <i class="fa fa-credit-card"></i>
           <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
         <% else %>
-          <i>No billing information present. Click to add.</i>
+          <i>No payment information added. Click to add.</i>
         <% end %>
       <% end %>
+      <div class="content-label">Service Address</div>
       <% @service_addresses.each do |service_address| %>
         <%= link_to edit_service_address_path(service_address), class: :cell do %>
           <h3><%= service_address.name.presence || service_address.address %></h3>
@@ -23,7 +31,9 @@
           </small>
         <% end %>
       <% end %>
-      <%= link_to "+ Add Service Address", new_service_address_path, class: :cell %>
+      <%= link_to new_service_address_path, class: "text-center cell" do %>
+        <small>+ Add Service Address</small>
+      <% end %>
     </div>
   </div>
 </div>

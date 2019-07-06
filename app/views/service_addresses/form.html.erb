@@ -2,6 +2,7 @@
   <div class="central-container">
     <div class="container-title">Service Address</div>
     <div class="content">
+      <p><%= link_to "Account", account_path, class: :btn %></p>
       <%= form_for @service_address, data: parsley(:validate, trigger: :blur) do |f| %>
         <%= render partial: "layouts/error_container", locals: { resource: @service_address } %>
         <div class="cell">

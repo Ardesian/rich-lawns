@@ -44,7 +44,8 @@ class StripeCard < ApplicationRecord
   def stripeToken=(token)
     customer = Stripe::Customer.create(
       source: token,
-      description: "User[#{user.try(:id)}] - #{user.try(:email)}"
+      email: user.try(:email),
+      description: "User[#{user.try(:id)}]"
     )
     return if customer.try(:id).nil?
     self.customer_id = customer.id

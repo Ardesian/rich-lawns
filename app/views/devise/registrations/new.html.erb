@@ -5,8 +5,18 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <div class="cell">
           <div class="form-field">
+            <%= f.label :name %>
+            <%= f.text_field :name, autofocus: true, autocomplete: "name", data: parsley(:required) %>
+          </div>
+
+          <div class="form-field">
             <%= f.label :email %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, autocomplete: "email", data: parsley(:required) %>
+          </div>
+
+          <div class="form-field">
+            <%= f.label :phone %>
+            <%= f.text_field :phone, autocomplete: "phone_number", data: parsley(:required) %>
           </div>
 
           <div class="form-field">

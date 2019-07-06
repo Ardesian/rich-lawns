@@ -45,13 +45,14 @@
         }
       })
     </script>
-<% end %>
+  <% end %>
 <% end %>
 
 <div class="skinny-container">
   <div class="central-container">
-    <div class="container-title"></div>
+    <div class="container-title">Payment Information</div>
     <div class="content">
+      <p><%= link_to "Account", account_path, class: :btn %></p>
       <%= form_for @stripe_card, data: parsley(:validate, trigger: :blur), html: { id: "payment-form" } do |f| %>
         <%= render partial: "layouts/error_container", locals: { resource: @stripe_card } %>
         <div id="card-errors" role="alert"></div>
