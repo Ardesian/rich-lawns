@@ -28,11 +28,19 @@ class User < ApplicationRecord
   has_many :stripe_cards
   has_many :sent_emails, class_name: "Email", foreign_key: :sent_by_id, dependent: :destroy
 
+  after_create :ping_slack
+
   def default_payment_card
     stripe_cards.current.default.first
   end
 
   def see!
     # last logged in at NOW
+  end
+
+  private
+
+  def ping_slack
+    SlackNotifier.notify("New user: #{name} <|>")
   end
 end
