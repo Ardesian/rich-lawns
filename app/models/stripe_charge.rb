@@ -3,6 +3,7 @@
 # Table name: stripe_charges
 #
 #  id              :bigint           not null, primary key
+#  token           :string
 #  stripe_card_id  :bigint
 #  cost_in_pennies :integer
 #  payment_error   :string
@@ -12,6 +13,8 @@
 #
 
 class StripeCharge < ApplicationRecord
+  include Tokenable
+  
   scope :success, -> { where.not(charged_at: nil) }
   scope :failed, -> { where.not(payment_error: ['', nil]).where(charged_at: nil) }
   scope :pending, -> { where(charged_at: nil, payment_error: ['', nil]) }

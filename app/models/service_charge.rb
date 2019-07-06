@@ -3,6 +3,7 @@
 # Table name: service_charges
 #
 #  id                 :bigint           not null, primary key
+#  token              :string
 #  user_id            :bigint
 #  service_address_id :bigint
 #  stripe_charge_id   :bigint
@@ -11,6 +12,8 @@
 #
 
 class ServiceCharge < ApplicationRecord
+  include Tokenable
+  
   belongs_to :user
   belongs_to :service_address
   belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending

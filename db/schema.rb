@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_213336) do
   end
 
   create_table "service_charges", force: :cascade do |t|
+    t.string "token"
     t.bigint "user_id"
     t.bigint "service_address_id"
     t.bigint "stripe_charge_id"
@@ -90,6 +91,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_213336) do
   end
 
   create_table "stripe_cards", force: :cascade do |t|
+    t.string "token"
     t.bigint "user_id"
     t.boolean "default"
     t.string "customer_id"
@@ -97,12 +99,14 @@ ActiveRecord::Schema.define(version: 2019_07_05_213336) do
     t.integer "exp_month"
     t.integer "exp_year"
     t.string "customer_error"
+    t.datetime "removed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_stripe_cards_on_user_id"
   end
 
   create_table "stripe_charges", force: :cascade do |t|
+    t.string "token"
     t.bigint "stripe_card_id"
     t.integer "cost_in_pennies"
     t.string "payment_error"

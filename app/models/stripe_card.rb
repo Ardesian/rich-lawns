@@ -3,6 +3,7 @@
 # Table name: stripe_cards
 #
 #  id             :bigint           not null, primary key
+#  token          :string
 #  user_id        :bigint
 #  default        :boolean
 #  customer_id    :string
@@ -10,11 +11,14 @@
 #  exp_month      :integer
 #  exp_year       :integer
 #  customer_error :string
+#  removed_at     :datetime
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #
 
 class StripeCard < ApplicationRecord
+  include Tokenable
+
   belongs_to :user
   has_many :stripe_charges
   has_many :service_charges, through: :stripe_charges
@@ -23,18 +27,20 @@ class StripeCard < ApplicationRecord
 
   defaults default: true
 
+  scope :default, -> { where(default: true) }
+
   def charge(amount_in_pennies)
     new_charge = stripe_charges.create(cost_in_pennies: amount_in_pennies)
 
     update(customer_error: new_charge.payment_error) unless new_charge.charge
-    
+
     new_charge
   end
 
   def stripe_token=(token)
     customer = Stripe::Customer.create(
       source: token,
-      description: "User[#{user.try(:id)}] - #{description}"
+      description: "User[#{user.try(:id)}] - #{user.try(:email)}"
     )
     return if customer.try(:id).nil?
     self.customer_id = customer.id

@@ -2,9 +2,13 @@
   <div class="central-container">
     <div class="container-title">Account</div>
     <div class="content">
-      <div class="cell">
-        Billing Information
-      </div>
+      <%= link_to billing_index_path, class: :cell do %>
+        <h3>Billing Information <small>(Click to edit)</small></h3>
+        <% if current_user.default_payment_card.present? %>
+          Last 4, exp date
+          -- Show errors if any
+        <% end %>
+      <% end %>
       <% @service_addresses.each do |service_address| %>
         <%= link_to edit_service_address_path(service_address), class: :cell do %>
           <h3><%= service_address.name.presence || service_address.address %></h3>

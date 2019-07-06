@@ -1,6 +1,7 @@
 class CreateCharges < ActiveRecord::Migration[5.2]
   def change
     create_table :stripe_cards do |t|
+      t.string :token
       t.belongs_to :user
       t.boolean :default
 
@@ -11,10 +12,12 @@ class CreateCharges < ActiveRecord::Migration[5.2]
 
       t.string :customer_error
 
+      t.datetime :removed_at
       t.timestamps
     end
 
     create_table :stripe_charges do |t|
+      t.string :token
       t.belongs_to :stripe_card
 
       t.integer :cost_in_pennies
@@ -25,6 +28,7 @@ class CreateCharges < ActiveRecord::Migration[5.2]
     end
 
     create_table :service_charges do |t|
+      t.string :token
       t.belongs_to :user
       t.belongs_to :service_address
       t.belongs_to :stripe_charge

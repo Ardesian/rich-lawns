@@ -1,0 +1,13 @@
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title">Account</div>
+    <div class="content">
+      <% @stripe_cards.each do |stripe_card| %>
+        <%= link_to edit_billing_path(stripe_card), class: :cell do %>
+          <%= stripe_card %>
+        <% end %>
+      <% end %>
+      <%= link_to "+ Add new card", new_service_address_path, class: :cell %>
+    </div>
+  </div>
+</div>
