@@ -1,0 +1,90 @@
+<%= content_for(:head) do %>
+  <% unless @stripe_card.persisted? %>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script type="text/javascript">
+      var stripe = Stripe('<%= ENV["RICH_STRIPE_PUB"] %>')
+      var elements = stripe.elements()
+
+      $(document).ready(function() {
+        var style = { base: { fontSize: "18px" } }
+        var card = elements.create("card", { style: style })
+        card.mount("#card-element")
+
+        card.addEventListener("change", function(event) {
+          var displayError = document.getElementById("card-errors")
+          if (event.error) {
+            displayError.textContent = event.error.message
+          } else {
+            displayError.textContent = ""
+          }
+        })
+
+        var form = document.getElementById("payment-form")
+        form.addEventListener("submit", function(event) {
+          event.preventDefault()
+
+          stripe.createToken(card).then(function(result) {
+            if (result.error) {
+              var errorElement = document.getElementById("card-errors")
+              errorElement.textContent = result.error.message
+            } else {
+              stripeTokenHandler(result.token)
+            }
+          })
+        })
+
+        function stripeTokenHandler(token) {
+          var form = document.getElementById("payment-form")
+          var hiddenInput = document.createElement("input")
+          hiddenInput.setAttribute("type", "hidden")
+          hiddenInput.setAttribute("name", "stripe_card[stripeToken]")
+          hiddenInput.setAttribute("value", token.id)
+          form.appendChild(hiddenInput)
+
+          form.submit()
+        }
+      })
+    </script>
+<% end %>
+<% end %>
+
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title"></div>
+    <div class="content">
+      <%= form_for @stripe_card, data: parsley(:validate, trigger: :blur), html: { id: "payment-form" } do |f| %>
+        <%= render partial: "layouts/error_container", locals: { resource: @stripe_card } %>
+        <div id="card-errors" role="alert"></div>
+        <div class="cell">
+
+          <div class="form-field">
+            <%= f.label :name, "Card Name (Optional)" %>
+            <%= f.text_field :name %>
+          </div>
+
+          <% if @stripe_card.persisted? %>
+            <div class="form-field text-center">
+              <strong>Ends in: <%= @stripe_card.last_4 %> | Expiration: <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
+            </div>
+          <% else %>
+            <div class="form-field">
+              <%= f.label :stripeToken, "Card Details" %>
+              <div id="card-element"></div>
+            </div>
+          <% end %>
+
+          <div class="text-center">
+            <div class="actions">
+              <%= f.submit "Save" %>
+            </div>
+            <% if @stripe_card.persisted? %>
+              <div class="actions">
+                <%= link_to "Remove Card", stripe_card_path(@stripe_card), class: "btn danger", method: :delete %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

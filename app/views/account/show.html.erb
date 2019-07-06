@@ -2,11 +2,15 @@
   <div class="central-container">
     <div class="container-title">Account</div>
     <div class="content">
-      <%= link_to billing_index_path, class: :cell do %>
+      <%= link_to @stripe_card.present? ? stripe_cards_path : new_stripe_card_path, class: :cell do %>
         <h3>Billing Information <small>(Click to edit)</small></h3>
-        <% if current_user.default_payment_card.present? %>
-          Last 4, exp date
-          -- Show errors if any
+        <% if @stripe_card.present? %>
+          <% if @stripe_card.name.present? %>
+            <h3><%= @stripe_card.name %></h3>
+          <% end %>
+          <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
+        <% else %>
+          <i>No billing information present. Click to add.</i>
         <% end %>
       <% end %>
       <% @service_addresses.each do |service_address| %>

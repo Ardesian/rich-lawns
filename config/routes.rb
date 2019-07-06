@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   resources :emails, except: [:destroy, :edit]
   resources :service_addresses, except: [:show, :index]
-  resources :billing
+  resources :stripe_cards, path: :billing
 
   scope :webhooks do
     post :email, controller: :webhooks

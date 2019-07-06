@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 2019_07_05_213336) do
     t.string "token"
     t.bigint "user_id"
     t.boolean "default"
+    t.string "name"
     t.string "customer_id"
     t.string "last_4"
     t.integer "exp_month"

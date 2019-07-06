@@ -14,12 +14,11 @@
 
 class StripeCharge < ApplicationRecord
   include Tokenable
-  
+  belongs_to :stripe_card, required: true
+
   scope :success, -> { where.not(charged_at: nil) }
   scope :failed, -> { where.not(payment_error: ['', nil]).where(charged_at: nil) }
   scope :pending, -> { where(charged_at: nil, payment_error: ['', nil]) }
-
-  validates :customer_id, presence: true
 
   def charged?; charged_at?; end
   def success?; charged?; end

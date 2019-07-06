@@ -6,6 +6,7 @@
 #  token          :string
 #  user_id        :bigint
 #  default        :boolean
+#  name           :string
 #  customer_id    :string
 #  last_4         :string
 #  exp_month      :integer
@@ -25,9 +26,12 @@ class StripeCard < ApplicationRecord
 
   after_commit :check_default
 
+  validates :customer_id, presence: true
+
   defaults default: true
 
   scope :default, -> { where(default: true) }
+  scope :current, -> { where(removed_at: nil) }
 
   def charge(amount_in_pennies)
     new_charge = stripe_charges.create(cost_in_pennies: amount_in_pennies)
@@ -37,7 +41,7 @@ class StripeCard < ApplicationRecord
     new_charge
   end
 
-  def stripe_token=(token)
+  def stripeToken=(token)
     customer = Stripe::Customer.create(
       source: token,
       description: "User[#{user.try(:id)}] - #{user.try(:email)}"

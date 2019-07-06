@@ -3,6 +3,7 @@ class AccountController < ApplicationController
 
   def show
     @service_addresses = current_user.service_addresses.current.order(:id)
+    @stripe_card = current_user.default_payment_card
   end
 
   def edit

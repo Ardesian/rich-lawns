@@ -5,6 +5,7 @@ class CreateCharges < ActiveRecord::Migration[5.2]
       t.belongs_to :user
       t.boolean :default
 
+      t.string :name
       t.string :customer_id
       t.string :last_4
       t.integer :exp_month

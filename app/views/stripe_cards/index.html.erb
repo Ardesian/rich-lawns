@@ -1,0 +1,19 @@
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title">Billing Information</div>
+    <div class="content">
+      <% @stripe_cards.each do |stripe_card| %>
+        <%= link_to edit_stripe_card_path(stripe_card), class: :cell do %>
+          <% if stripe_card.name.present? %>
+            <h3><%= stripe_card.name %></h3>
+          <% end %>
+          <strong><%= stripe_card.last_4 %> | <%= stripe_card.exp_month %>/<%= stripe_card.exp_year %></strong>
+          <% if stripe_card.default? %>
+            <br>Default Payment
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= link_to "+ Add new card", new_stripe_card_path, class: :cell %>
+    </div>
+  </div>
+</div>

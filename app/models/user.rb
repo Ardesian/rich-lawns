@@ -29,7 +29,7 @@ class User < ApplicationRecord
   has_many :sent_emails, class_name: "Email", foreign_key: :sent_by_id, dependent: :destroy
 
   def default_payment_card
-    stripe_cards.default.first
+    stripe_cards.current.default.first
   end
 
   def see!

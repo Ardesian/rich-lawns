@@ -1,13 +1,13 @@
-class BillingController < ApplicationController
+class StripeCardsController < ApplicationController
   before_action :authenticate_user
   before_action :set_stripe_card
 
   def index
-    @stripe_cards = current_user.stripe_cards.order(id: :desc)
+    @stripe_cards = current_user.stripe_cards.current.order(id: :desc)
   end
 
   def new
-    @stripe_card = current_user.stripe_cards.new
+    @stripe_card = current_user.stripe_cards.current.new
 
     render :form
   end
@@ -45,12 +45,15 @@ class BillingController < ApplicationController
   private
 
   def stripe_card_params
-    params.require(:stripe_card).permit(:stripe_token)
+    params.require(:stripe_card).permit(
+      :name,
+      :stripeToken
+    )
   end
 
   def set_stripe_card
     return unless params[:id].present?
-    @stripe_card = current_user.stripe_cards.find_by!(token: params[:id])
+    @stripe_card = current_user.stripe_cards.current.find_by!(token: params[:id])
   end
 
 end
