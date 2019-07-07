@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    # resources :users
     resources :service_addresses
-    resources :users
     resources :service_charges
   end
 

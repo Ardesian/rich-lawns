@@ -2,6 +2,7 @@
   <div class="central-container">
     <div class="container-title">Client</div>
     <div class="content">
+      <p><%= link_to "Back", [:admin, :service_addresses], class: :btn %></p>
 
       <div class="content-label">Account Details</div>
       <%= content_tag :div, class: :cell do %>
@@ -29,7 +30,7 @@
           <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
           <%= form_for [:admin, @service_charge] do |f| %>
             <%= hidden_field_tag :service_address_token, @service_address.token %>
-            <%= f.number_field :charge, placeholder: "Charge Amount" %>
+            <%= f.number_field :charge, placeholder: "Charge Amount", step: "0.01" %>
             <!-- Quick buttons -->
             <%= f.text_area :notes, placeholder: "Notes for service done" %>
             <div class="text-center">

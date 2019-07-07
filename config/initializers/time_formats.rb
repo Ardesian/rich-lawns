@@ -5,3 +5,10 @@ Date::DATE_FORMATS[:standard_with_weekday] = "%a, %-d %b %Y"
 Date::DATE_FORMATS[:simple] = "%b %-d, %Y"
 Time::DATE_FORMATS[:simple] = "%b %-d, %Y"
 Time::DATE_FORMATS[:simple_with_time] = "%b %-d, %Y %-I:%M %p"
+
+
+class Time
+  def local
+    in_time_zone("Mountain Time (US & Canada)")
+  end
+end

@@ -1,0 +1,46 @@
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title">Service History</div>
+    <div class="content">
+      <p><%= link_to "Back", [:admin, :service_addresses], class: :btn %></p>
+
+      <div class="content-label">Service Charges</div>
+      <% @service_charges.each do |service_charge| %>
+        <%#= link_to [:admin, service_charge], class: :cell do %>
+        <%= content_tag :div, class: :cell do %>
+          <% service_address = service_charge.service_address %>
+          <h3><%= service_address.name.presence || service_address.address %></h3>
+          <small>
+            <p>
+              Amount:
+              <strong><%= number_to_currency(service_charge.cost) || "N/A" %></strong>
+            </p>
+            <p>
+              Date:
+              <strong><%= service_charge.created_at.local.to_formatted_s(:simple_with_time) %></strong>
+            </p>
+            <% if service_charge.notes.present? %>
+              <p>
+                Notes:
+                <%= service_charge.notes %>
+              </p>
+            <% end %>
+            <% if service_charge.stripe_charge.try(:payment_error).present? %>
+              <p class="danger">
+                Billing Error:
+                <%= service_charge.stripe_charge.payment_error %>
+              </p>
+            <% end %>
+            <% if service_charge.stripe_charge.blank? %>
+              <p class="danger">
+                Billing Error:
+                Payment failed: No charge made.
+              </p>
+            <% end %>
+          </small>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

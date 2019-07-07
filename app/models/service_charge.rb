@@ -19,6 +19,8 @@ class ServiceCharge < ApplicationRecord
   belongs_to :service_address
   belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending
 
+  delegate :cost, to: :stripe_charge, allow_nil: true
+
   def charge; 30; end
   def charge=(dollars)
     charge_amount_in_pennies((dollars.to_f * 100).round)

@@ -30,6 +30,10 @@ class StripeCharge < ApplicationRecord
     charge
   end
 
+  def cost
+    (cost_in_pennies.to_i / 100.to_f).round(2)
+  end
+
   def charge
     return fail!(error: "No customer found") unless persisted?
     return true if charged?
