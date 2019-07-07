@@ -28,6 +28,7 @@ class ServiceCharge < ApplicationRecord
 
   def charge_amount_in_pennies(amount_in_pennies)
     new_charge = user.try(:default_payment_card)&.charge(amount_in_pennies)
+    SlackNotifier.notify("Failed to charge: #{new_charge.payment_error}") unless new_charge.success?
     update(stripe_charge: new_charge) if new_charge.present?
   end
 end

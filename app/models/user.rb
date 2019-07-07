@@ -41,6 +41,6 @@ class User < ApplicationRecord
   private
 
   def ping_slack
-    SlackNotifier.notify("New user: #{name} <|>")
+    SlackNotifier.notify("New user: #{name}")
   end
 end
