@@ -18,6 +18,9 @@
           <% end %>
           <i class="fa fa-credit-card"></i>
           <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
+          <% if @stripe_card.customer_error.present? %>
+            <p class="danger">Failed to charge card: <br><%= @stripe_card.customer_error %></p>
+          <% end %>
         <% else %>
           <i>No payment information added. Click to add.</i>
         <% end %>

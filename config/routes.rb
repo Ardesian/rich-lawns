@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     post :email, controller: :webhooks
   end
 
+  namespace :admin do
+    resources :service_addresses
+    resources :users
+    resources :service_charges
+  end
+
   devise_for :users, path: :account, path_names: { sign_in: "login", sign_out: "logout" }, skip: [:confirmations], controllers: {
     # confirmations: "devise/user/confirmations",
     # omniauth_callbacks: "devise/user/omniauth_callbacks",

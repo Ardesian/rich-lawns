@@ -1,0 +1,46 @@
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title">Client</div>
+    <div class="content">
+
+      <div class="content-label">Account Details</div>
+      <%= content_tag :div, class: :cell do %>
+        <h3><%= @client.name %></h3>
+        <small>Contact: <%= @client.email %> | <%= @client.phone %></small> <br>
+      <% end %>
+
+      <div class="content-label">Service Address</div>
+      <%= content_tag :div, class: :cell do %>
+        <h3><%= @service_address.name.presence || @service_address.address %></h3>
+        <small>
+          <%= @service_address.frequency.titleize %> <br>
+          Last Service:
+          <strong><%= @service_address.last_service&.to_formatted_s(:simple) || "Never Serviced" %></strong>
+        </small>
+      <% end %>
+
+      <div class="content-label">Billing</div>
+      <%= content_tag :div, class: :cell do %>
+        <% if @stripe_card.present? %>
+          <% if @stripe_card.name.present? %>
+            <h3><%= @stripe_card.name %></h3>
+          <% end %>
+          <i class="fa fa-credit-card"></i>
+          <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
+          <%= form_for [:admin, @service_charge] do |f| %>
+            <%= hidden_field_tag :service_address_token, @service_address.token %>
+            <%= f.number_field :charge, placeholder: "Charge Amount" %>
+            <!-- Quick buttons -->
+            <%= f.text_area :notes, placeholder: "Notes for service done" %>
+            <div class="text-center">
+              <%= f.submit "Charge Client" %>
+            </div>
+          <% end %>
+        <% else %>
+          <i>No payment information added.</i>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

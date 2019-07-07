@@ -15,6 +15,7 @@
 class StripeCharge < ApplicationRecord
   include Tokenable
   belongs_to :stripe_card, required: true
+  has_many :service_charges
 
   scope :success, -> { where.not(charged_at: nil) }
   scope :failed, -> { where.not(payment_error: ['', nil]).where(charged_at: nil) }
@@ -25,6 +26,10 @@ class StripeCharge < ApplicationRecord
   def failed?; payment_error?; end
   def pending?; !success? && !failed?; end
 
+  def retry
+    charge
+  end
+
   def charge
     return fail!(error: "No customer found") unless persisted?
     return true if charged?
@@ -34,7 +39,7 @@ class StripeCharge < ApplicationRecord
       charge = Stripe::Charge.create(
         amount: cost_in_pennies,
         currency: 'usd',
-        customer: customer_id
+        customer: stripe_card.customer_id
       )
     rescue Faraday::ClientError => err
       return fail!(error: err.try(:message)) # Not sure how this happens yet?

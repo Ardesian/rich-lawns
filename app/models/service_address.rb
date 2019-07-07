@@ -19,6 +19,7 @@
 class ServiceAddress < ApplicationRecord
   include Tokenable
   belongs_to :user
+  has_many :service_charges
 
   validates :address, :city, :zip, presence: true
 
@@ -44,5 +45,9 @@ class ServiceAddress < ApplicationRecord
       name = frequency.titleize.gsub(/(bi|semi)/i, '\1-')
       [name, frequency]
     end
+  end
+
+  def serviced!
+    update(last_service: Time.current)
   end
 end

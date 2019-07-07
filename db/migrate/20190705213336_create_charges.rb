@@ -33,6 +33,7 @@ class CreateCharges < ActiveRecord::Migration[5.2]
       t.belongs_to :user
       t.belongs_to :service_address
       t.belongs_to :stripe_charge
+      t.text :notes
 
       t.timestamps
     end

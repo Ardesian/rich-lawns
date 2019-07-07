@@ -13,7 +13,7 @@ module Tokenable
 
   def generate_token
     self.token = loop do
-      random_token = SecureRandom.urlsafe_base64(4, false)
+      random_token = SecureRandom.urlsafe_base64(4, false).gsub(/[^a-z1-9]/, "x")
       break random_token unless self.class.exists?(token: random_token)
     end
   end
