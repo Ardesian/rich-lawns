@@ -7,7 +7,7 @@ class ApplicationMailer < ActionMailer::Base
       to:           opts[:to],
       from:         opts[:from] || "admin@rich-lawns.com",
       subject:      opts[:subject],
-      content_type: opts[:content_type],
+      content_type: opts[:content_type] || "text/html",
       body:         opts[:body]
     )
   end

@@ -118,6 +118,46 @@ select {
   }
 }
 
+.quickbox-wrapper {
+  input[type=checkbox] { display: none; }
+  input[type=checkbox] + label {
+    .checkbox-placeholder {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      margin: 2px;
+      width: 25px;
+      height: 25px;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        border: 2px solid map-get($pri, base);
+        border-radius: 4px;
+        content: "";
+      }
+      &:after {
+        position: absolute;
+        top: -8px;
+        left: 0;
+        font-family: "FontAwesome";
+        font-size: 35px;
+      }
+    }
+  }
+  input[type=checkbox]:not(:checked) + label:hover .checkbox-placeholder:after {
+    color: rgba(map-get($pri, base), 0.7);
+    content: "\f00c";
+  }
+  input[type=checkbox]:checked + label .checkbox-placeholder:after {
+    color: map-get($pri, base);
+    content: "\f00c";
+  }
+}
+
 .checkbox-wrapper {
   input[type=checkbox] { display: none; }
   input[type=checkbox] + label {

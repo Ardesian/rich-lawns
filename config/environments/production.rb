@@ -24,8 +24,8 @@ Rails.application.configure do
   ActionMailer::Base.smtp_settings = {
     address:              "email-smtp.us-east-1.amazonaws.com",
     port:                 587,
-    user_name:            ENV["RICHLAWNS_SMTP_USERNAME"],
-    password:             ENV["RICHLAWNS_SMTP_PASSWORD"],
+    user_name:            ENV["RICH_SMTP_USERNAME"],
+    password:             ENV["RICH_SMTP_PASSWORD"],
     authentication:       :plain,
     enable_starttls_auto: true
   }

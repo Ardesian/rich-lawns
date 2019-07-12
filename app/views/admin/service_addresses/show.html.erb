@@ -31,6 +31,10 @@
           <%= form_for [:admin, @service_charge] do |f| %>
             <%= hidden_field_tag :service_address_token, @service_address.token %>
             <%= f.number_field :charge, placeholder: "Charge Amount", step: "0.01" %>
+            <div class="quick-btns">
+              <div class="quick-btn">
+              </div>
+            </div>
             <!-- Quick buttons -->
             <%= f.text_area :notes, placeholder: "Notes for service done" %>
             <div class="text-center">
