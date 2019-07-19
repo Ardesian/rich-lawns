@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_05_213336) do
+ActiveRecord::Schema.define(version: 2019_07_18_235226) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2019_07_05_213336) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sent_by_id"], name: "index_emails_on_sent_by_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "stripe_charge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stripe_charge_id"], name: "index_invoices_on_stripe_charge_id"
+    t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -89,6 +98,26 @@ ActiveRecord::Schema.define(version: 2019_07_05_213336) do
     t.index ["service_address_id"], name: "index_service_charges_on_service_address_id"
     t.index ["stripe_charge_id"], name: "index_service_charges_on_stripe_charge_id"
     t.index ["user_id"], name: "index_service_charges_on_user_id"
+  end
+
+  create_table "service_items", force: :cascade do |t|
+    t.bigint "service_job_id"
+    t.string "description"
+    t.integer "cost_in_pennies"
+    t.integer "time_in_minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["service_job_id"], name: "index_service_items_on_service_job_id"
+  end
+
+  create_table "service_jobs", force: :cascade do |t|
+    t.bigint "invoice_id"
+    t.bigint "service_address_id"
+    t.date "date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invoice_id"], name: "index_service_jobs_on_invoice_id"
+    t.index ["service_address_id"], name: "index_service_jobs_on_service_address_id"
   end
 
   create_table "stripe_cards", force: :cascade do |t|
