@@ -15,7 +15,7 @@
 class StripeCharge < ApplicationRecord
   include Tokenable
   belongs_to :stripe_card, required: true
-  has_many :service_charges
+  has_many :service_jobs
 
   scope :success, -> { where.not(charged_at: nil) }
   scope :failed, -> { where.not(payment_error: ['', nil]).where(charged_at: nil) }

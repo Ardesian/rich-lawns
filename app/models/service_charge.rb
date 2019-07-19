@@ -12,27 +12,27 @@
 #  updated_at         :datetime         not null
 #
 
-class ServiceCharge < ApplicationRecord
-  include Tokenable
-
-  belongs_to :user
-  belongs_to :service_address
-  belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending
-
-  delegate :cost, to: :stripe_charge, allow_nil: true
-
-  def charge; 30; end
-  def charge=(dollars)
-    charge_amount_in_pennies((dollars.to_f * 100).round)
-  end
-
-  def charge_amount_in_pennies(amount_in_pennies)
-    new_charge = user.try(:default_payment_card)&.charge(amount_in_pennies)
-    if new_charge.success?
-      SlackNotifier.notify("Successfully charged: #{user.name} $#{cost} | #{notes}")
-    else
-      SlackNotifier.notify("Failed to charge: #{new_charge.payment_error}")
-    end
-    update(stripe_charge: new_charge) if new_charge.present?
-  end
-end
+# class ServiceCharge < ApplicationRecord
+#   include Tokenable
+#
+#   belongs_to :user
+#   belongs_to :service_address
+#   belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending
+#
+#   delegate :cost, to: :stripe_charge, allow_nil: true
+#
+#   def charge; 30; end
+#   def charge=(dollars)
+#     charge_amount_in_pennies((dollars.to_f * 100).round)
+#   end
+#
+#   def charge_amount_in_pennies(amount_in_pennies)
+#     new_charge = user.try(:default_payment_card)&.charge(amount_in_pennies)
+#     if new_charge.success?
+#       SlackNotifier.notify("Successfully charged: #{user.name} $#{cost} | #{notes}")
+#     else
+#       SlackNotifier.notify("Failed to charge: #{new_charge.payment_error}")
+#     end
+#     update(stripe_charge: new_charge) if new_charge.present?
+#   end
+# end

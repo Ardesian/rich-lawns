@@ -22,27 +22,14 @@
 
       <div class="content-label">Billing</div>
       <%= content_tag :div, class: :cell do %>
-        <% if @stripe_card.present? %>
-          <% if @stripe_card.name.present? %>
-            <h3><%= @stripe_card.name %></h3>
-          <% end %>
-          <i class="fa fa-credit-card"></i>
-          <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
-          <%= form_for [:admin, @service_charge] do |f| %>
-            <%= hidden_field_tag :service_address_token, @service_address.token %>
-            <%= f.number_field :charge, placeholder: "Charge Amount", step: "0.01" %>
-            <div class="quick-btns">
-              <div class="quick-btn">
-              </div>
-            </div>
-            <!-- Quick buttons -->
-            <%= f.text_area :notes, placeholder: "Notes for service done" %>
-            <div class="text-center">
-              <%= f.submit "Charge Client" %>
-            </div>
-          <% end %>
-        <% else %>
-          <i>No payment information added.</i>
+        <%= form_for [:admin, @service_job] do |f| %>
+          <%= hidden_field_tag :service_address_token, @service_address.token %>
+          <div class="inline-fields">
+          </div>
+          <%= f.text_area :notes, placeholder: "Additional notes for service done" %>
+          <div class="text-center">
+            <%= f.submit "Charge Client" %>
+          </div>
         <% end %>
       <% end %>
 

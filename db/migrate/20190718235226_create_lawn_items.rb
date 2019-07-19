@@ -11,6 +11,7 @@ class CreateLawnItems < ActiveRecord::Migration[5.2]
       t.belongs_to :invoice
       t.belongs_to :service_address
       t.date :date
+      t.text :notes
       # has_many :service_items
 
       t.timestamps

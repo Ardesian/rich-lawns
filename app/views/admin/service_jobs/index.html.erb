@@ -1,0 +1,34 @@
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title">Service History</div>
+    <div class="content">
+      <p><%= link_to "Back", [:admin, :service_addresses], class: :btn %></p>
+
+      <div class="content-label">Service Jobs</div>
+      <% @service_jobs.each do |service_job| %>
+        <%#= link_to [:admin, service_job], class: :cell do %>
+        <%= content_tag :div, class: :cell do %>
+          <% service_address = service_job.service_address %>
+          <h3><%= service_address.name.presence || service_address.address %></h3>
+          <small>
+            <p>
+              Amount:
+              <strong><%= number_to_currency(service_job.cost) || "N/A" %></strong>
+            </p>
+            <p>
+              Date:
+              <strong><%= service_job.created_at.local.to_formatted_s(:simple_with_time) %></strong>
+            </p>
+            <% if service_job.notes.present? %>
+              <p>
+                Notes:
+                <%= service_job.notes %>
+              </p>
+            <% end %>
+          </small>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>

@@ -22,7 +22,7 @@ class StripeCard < ApplicationRecord
 
   belongs_to :user
   has_many :stripe_charges
-  has_many :service_charges, through: :stripe_charges
+  has_many :service_jobs, through: :stripe_charges
 
   after_commit :check_default
 

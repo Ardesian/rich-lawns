@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(version: 2019_07_18_235226) do
     t.bigint "invoice_id"
     t.bigint "service_address_id"
     t.date "date"
+    t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["invoice_id"], name: "index_service_jobs_on_invoice_id"

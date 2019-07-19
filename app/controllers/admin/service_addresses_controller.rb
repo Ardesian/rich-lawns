@@ -6,7 +6,6 @@ class Admin::ServiceAddressesController < Admin::BaseController
   def show
     @service_address = ServiceAddress.find_by!(token: params[:id])
     @client = @service_address.user
-    @stripe_card = @client.default_payment_card
-    @service_charge = @stripe_card.try(:service_charges).try(:new)
+    @service_job = @service_address.service_jobs.new
   end
 end

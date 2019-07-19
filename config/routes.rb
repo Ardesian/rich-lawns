@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   namespace :admin do
     # resources :users
     resources :service_addresses
-    resources :service_charges
+    resources :service_jobs
   end
 
   devise_for :users, path: :account, path_names: { sign_in: "login", sign_out: "logout" }, skip: [:confirmations], controllers: {
