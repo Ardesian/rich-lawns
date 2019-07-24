@@ -13,4 +13,15 @@
 
 class ServiceItem < ApplicationRecord
   belongs_to :service_job
+
+  scope :not_default, -> { where.not(description: ServiceJob.default_service_item_names) }
+
+  def cost_in_dollars=(new_cost)
+    (new_cost / 100.to_f).round
+  end
+
+  def cost_in_dollars
+    return unless cost_in_pennies.present?
+    (cost_in_pennies.to_i * 100.to_f).round(2)
+  end
 end

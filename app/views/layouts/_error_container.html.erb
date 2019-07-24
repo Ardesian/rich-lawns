@@ -3,7 +3,7 @@
 <% error_title ||= "#{pluralize(error_messages.count, 'error')} prohibited this #{(resource_class || resource.class).table_name.singularize.titleize} from being saved:" %>
 
 <% if error_messages.any? %>
-  <div class="fields_with_errors" id="error_explanation">
+  <div class="error-container" id="error_explanation">
     <h4><%= error_title %></h4>
     <ul>
       <% error_messages.each do |message| %>

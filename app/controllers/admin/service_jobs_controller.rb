@@ -12,7 +12,8 @@ class Admin::ServiceJobsController < Admin::BaseController
       @service_address.serviced!
       redirect_to [:admin, :service_addresses], notice: "Job complete. 👍"
     else
-      redirect_to [:admin, @service_address], alert: "Failed to save. Please try again."
+      flash.now[:alert] = "Failed to save. Please try again."
+      render "admin/service_addresses/show"
     end
   end
 

@@ -24,28 +24,21 @@
       <%= content_tag :div, class: :cell do %>
         <%= form_for [:admin, @service_job] do |f| %>
           <%= hidden_field_tag :service_address_token, @service_address.token %>
-          <% @service_job.default_service_items.each do |service_name| %>
-            <div class="inline-fields">
-              <div class="form-field">
-                <%= text_field_tag "service_job[service_items][][name]", service_name %>
-              </div>
-              <div class="form-field" data-fa="clock">
-                <%= text_field_tag "service_job[service_items][][time_in_minutes]", nil, placeholder: "minutes"  %>
-              </div>
-            </div>
+          <%= render partial: "layouts/error_container", locals: { resource: @service_job } %>
+
+          <% @service_job.default_service_item_names.each do |service_name| %>
+            <% item = @service_job.service_items.find_or_initialize_by(description: service_name) %>
+            <%= render partial: "admin/service_addresses/service_job", locals: { item: item } %>
           <% end %>
 
           <template id="extra-jobs-template">
-            <div class="inline-fields">
-              <div class="form-field">
-                <%= text_field_tag "service_job[service_items][][name]", "", placeholder: "Other", class: "other-field" %>
-              </div>
-              <div class="form-field" data-fa="money">
-                <%= text_field_tag "service_job[service_items][][cost_in_pennies]" %>
-              </div>
-            </div>
+            <%= render partial: "admin/service_addresses/service_job" %>
           </template>
-          <div class="extra-jobs"></div>
+          <div class="extra-jobs">
+            <% @service_job.service_items.not_default.each do |item| %>
+              <%= render partial: "admin/service_addresses/service_job", locals: { item: item } %>
+            <% end %>
+          </div>
 
           <%= f.text_area :notes, placeholder: "Additional notes for service done" %>
           <div class="text-center">

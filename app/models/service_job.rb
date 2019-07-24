@@ -12,11 +12,13 @@
 #
 
 class ServiceJob < ApplicationRecord
-  belongs_to :invoice
+  belongs_to :invoice, optional: true
   belongs_to :service_address
   has_many :service_items
 
-  def default_service_items
+  accepts_nested_attributes_for :service_items, allow_destroy: true
+
+  def self.default_service_item_names
     [
       "Mowing",
       "Weeding",
@@ -25,6 +27,7 @@ class ServiceJob < ApplicationRecord
       "Clean up"
     ]
   end
+  delegate :default_service_item_names, to: :class
 
   def cost
     5 # Sum items
