@@ -4,8 +4,10 @@
 
 .inline-fields {
   display: flex;
+  vertical-align: middle;
 
   .form-field {
+    position: relative;
     width: 100%;
 
     &:not(:last-of-type) {

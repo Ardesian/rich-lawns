@@ -16,6 +16,16 @@ class ServiceJob < ApplicationRecord
   belongs_to :service_address
   has_many :service_items
 
+  def default_service_items
+    [
+      "Mowing",
+      "Weeding",
+      "Hedging",
+      "Tree/shrub removal",
+      "Clean up"
+    ]
+  end
+
   def cost
     5 # Sum items
   end

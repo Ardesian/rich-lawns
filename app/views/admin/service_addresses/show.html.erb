@@ -24,11 +24,32 @@
       <%= content_tag :div, class: :cell do %>
         <%= form_for [:admin, @service_job] do |f| %>
           <%= hidden_field_tag :service_address_token, @service_address.token %>
-          <div class="inline-fields">
-          </div>
+          <% @service_job.default_service_items.each do |service_name| %>
+            <div class="inline-fields">
+              <div class="form-field">
+                <%= text_field_tag "service_job[service_items][][name]", service_name %>
+              </div>
+              <div class="form-field" data-fa="clock">
+                <%= text_field_tag "service_job[service_items][][time_in_minutes]", nil, placeholder: "minutes"  %>
+              </div>
+            </div>
+          <% end %>
+
+          <template id="extra-jobs-template">
+            <div class="inline-fields">
+              <div class="form-field">
+                <%= text_field_tag "service_job[service_items][][name]", "", placeholder: "Other", class: "other-field" %>
+              </div>
+              <div class="form-field" data-fa="money">
+                <%= text_field_tag "service_job[service_items][][cost_in_pennies]" %>
+              </div>
+            </div>
+          </template>
+          <div class="extra-jobs"></div>
+
           <%= f.text_area :notes, placeholder: "Additional notes for service done" %>
           <div class="text-center">
-            <%= f.submit "Charge Client" %>
+            <%= f.submit "Submit Service" %>
           </div>
         <% end %>
       <% end %>

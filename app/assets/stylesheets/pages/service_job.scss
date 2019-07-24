@@ -1,0 +1,17 @@
+.form-field[data-fa] {
+  width: 150px;
+
+  input { padding-left: 25px; }
+  &:after {
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    margin-top: -10px;
+    height: 100%;
+    color: #A9A9A9;
+    font-family: "Font Awesome\ 5 Free";
+    content: "A";
+  }
+  &[data-fa=clock]:after { content: "\f017"; }
+  &[data-fa=money]:after { content: "\f155"; }
+}
