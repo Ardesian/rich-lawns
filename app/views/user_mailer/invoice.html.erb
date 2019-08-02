@@ -1,0 +1,51 @@
+<%= content_for(:style) do %>
+  <style>
+    th { text-align: left; }
+    table {
+      border-spacing: 10px;
+    }
+    td {
+      border: 1px solid grey;
+      border-radius: 8px;
+      padding: 5px;
+    }
+    td.hidden {
+      border: none;
+    }
+  </style>
+<% end %>
+
+<div class="cell">
+  <table style="width: 100%">
+    <tr>
+      <th>Description</th>
+      <th>Units</th>
+      <th>Unit Count</th>
+    </tr>
+    <tr>
+      <td>Labor</td>
+      <td style="text-align: right">7.5</td>
+      <td>$25</td>
+    </tr>
+    <tr>
+      <td>First service discount</td>
+      <td style="text-align: right"></td>
+      <td>$-25</td>
+    </tr>
+    <tr>
+      <td>Shrub Removal</td>
+      <td style="text-align: right">2</td>
+      <td>$10</td>
+    </tr>
+    <tr>
+      <td>Green Waste Can</td>
+      <td style="text-align: right">12</td>
+      <td>$5</td>
+    </tr>
+    <tr>
+      <td class="hidden"></td>
+      <td>Total</td>
+      <td>$262.50</td>
+    </tr>
+  </table>
+</div>

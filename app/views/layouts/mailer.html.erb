@@ -3,11 +3,68 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+    .central-container {
+      margin-top: 30px;
+      box-shadow: 3px 3px 10px #457315;
+      border-radius: 10px;
+      background: #D0E1BE;
+      overflow: hidden;
+      font-family: Arial;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .central-container .container-title {
+      background: #5A971B;
+      padding: 20px;
+      color: white;
+      font-size: 32px;
+    }
+    .central-container .container-title .subtitle {
+      font-size: 14px;
+    }
+    .central-container .content {
+      box-sizing: border-box;
+      padding: 20px;
+      padding-bottom: 5px;
+      width: 100%;
+    }
+    .central-container .content .content-label {
+      color: grey;
+      font-size: 20px;
+      text-align: center;
+    }
+    .central-container .content h3 {
+      margin: 0;
+    }
+    .central-container .content h3 small {
+      font-size: 12px;
+      font-style: italic;
+      font-weight: normal;
+    }
+    .central-container .cell {
+      display: block;
+      box-sizing: border-box;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      background: white;
+      padding: 15px;
+      width: 100%;
+      color: $text-color;
+      text-decoration: none;
+    }
+    .central-container .cell label { color: #6481A1; }
+    .central-container .cell p { margin: 3px 0; }
+    .central-container a.cell:hover { background: #F7FAF4; }
     </style>
+    <%= yield(:style) %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="skinny-container">
+      <div class="central-container">
+        <div class="container-title"><%= @title %></div>
+        <div class="content"><%= yield %></div>
+      </div>
+    </div>
   </body>
 </html>
