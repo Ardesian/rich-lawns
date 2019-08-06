@@ -2,7 +2,10 @@
   <div class="central-container">
     <div class="container-title">Client</div>
     <div class="content">
-      <p><%= link_to "Back", [:admin, :service_addresses], class: :btn %></p>
+      <p>
+        <%= link_to "Back", [:admin, :service_addresses], class: :btn %>
+        <%= link_to "Edit", [:edit, :admin, @service_address], class: "btn float-right" %>
+      </p>
 
       <div class="content-label">Account Details</div>
       <%= content_tag :div, class: :cell do %>

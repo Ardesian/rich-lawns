@@ -1,6 +1,8 @@
 class Admin::ServiceAddressesController < Admin::BaseController
+  before_action :set_service_address
+
   def index
-    @service_addresses = ServiceAddress.order(last_service: :desc, id: :desc)
+    @service_addresses = ServiceAddress.current.order(last_service: :desc, id: :desc)
   end
 
   def show
@@ -18,7 +20,7 @@ class Admin::ServiceAddressesController < Admin::BaseController
     @service_address = ServiceAddress.new(service_address_params)
 
     if @service_address.save
-      redirect_to [:admin, :service_addresses]
+      redirect_to [:admin, @service_address]
     else
       render :form
     end
@@ -30,7 +32,7 @@ class Admin::ServiceAddressesController < Admin::BaseController
 
   def update
     if @service_address.update(service_address_params)
-      redirect_to [:admin, :service_addresses]
+      redirect_to [:admin, @service_address]
     else
       render :form
     end
@@ -38,7 +40,7 @@ class Admin::ServiceAddressesController < Admin::BaseController
 
   def destroy
     if @service_address.update(removed_at: Time.current)
-      redirect_to [:admin, :service_addresses]
+      redirect_to [:admin, @service_address]
     else
       redirect_to [:admin, :service_addresses], alert: "Something went wrong."
     end
