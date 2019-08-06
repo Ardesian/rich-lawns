@@ -18,7 +18,7 @@
 
 class ServiceAddress < ApplicationRecord
   include Tokenable
-  belongs_to :user
+  belongs_to :user, optional: true
   has_many :service_jobs
 
   validates :address, :city, :zip, presence: true

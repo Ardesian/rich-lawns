@@ -6,8 +6,12 @@
 
       <div class="content-label">Account Details</div>
       <%= content_tag :div, class: :cell do %>
-        <h3><%= @client.name %></h3>
-        <small>Contact: <%= @client.email %> | <%= @client.phone %></small> <br>
+        <% if @client.present? %>
+          <h3><%= @client.name %></h3>
+          <small>Contact: <%= @client.email %> | <%= @client.phone %></small> <br>
+        <% else %>
+          <h3>Client not added yet.</h3>
+        <% end %>
       <% end %>
 
       <div class="content-label">Service Address</div>

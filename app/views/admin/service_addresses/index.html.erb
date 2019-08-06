@@ -11,6 +11,9 @@
       </div>
 
       <div class="content-label">Service Addresses</div>
+      <div class="text-center">
+        <p><%= link_to "New Service Address", new_admin_service_address_path, class: :btn %></p>
+      </div>
       <% @service_addresses.each do |service_address| %>
         <%= link_to admin_service_address_path(service_address), class: :cell do %>
           <h3><%= service_address.name.presence || service_address.address %></h3>

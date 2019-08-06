@@ -2,10 +2,15 @@
   <div class="central-container">
     <div class="container-title">Service Address</div>
     <div class="content">
-      <p><%= link_to "Account", account_path, class: :btn %></p>
-      <%= form_for @service_address, data: parsley(:validate, trigger: :blur) do |f| %>
+      <p><%= link_to "Back", admin_service_addresses_path, class: :btn %></p>
+      <%= form_for [:admin, @service_address], data: parsley(:validate, trigger: :blur) do |f| %>
         <%= render partial: "layouts/error_container", locals: { resource: @service_address } %>
         <div class="cell">
+
+          <div class="form-field">
+            <%= f.label :name, "Address Name (Optional)" %>
+            <%= f.text_field :name %>
+          </div>
 
           <div class="form-field">
             <%= f.label :address, "Street Address" %>

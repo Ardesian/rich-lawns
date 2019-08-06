@@ -16,6 +16,20 @@ class ServiceItem < ApplicationRecord
 
   scope :not_default, -> { where.not(description: ServiceJob.default_service_item_names) }
 
+  def cost_per_hour
+    25
+  end
+
+  def cost_per_minute
+    cost_per_hour / 60.to_f
+  end
+
+  def cost # pennies
+    return cost_in_pennies if cost_in_pennies.present?
+    return 0 if time_in_minutes.blank?
+    (cost_per_minute * time_in_minutes).round
+  end
+
   def cost_in_dollars=(new_cost)
     (new_cost / 100.to_f).round
   end

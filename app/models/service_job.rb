@@ -30,6 +30,8 @@ class ServiceJob < ApplicationRecord
   delegate :default_service_item_names, to: :class
 
   def cost
-    5 # Sum items
+    service_items.map do |item|
+      item.cost
+    end.sum
   end
 end

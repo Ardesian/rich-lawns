@@ -34,7 +34,7 @@
       <div class="content-label">Service Address</div>
       <% @service_addresses.each do |service_address| %>
         <%= link_to edit_service_address_path(service_address), class: :cell do %>
-          <h3><%= service_address.name.presence || service_address.address %></h3>
+          <h3><%= service_address.address %></h3>
           <small>
             <%= service_address.frequency.titleize %> <br>
             Last Service:
