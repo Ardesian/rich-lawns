@@ -7,8 +7,8 @@ class Admin::ServiceAddressesController < Admin::BaseController
 
   def show
     @service_address = ServiceAddress.find_by!(token: params[:id])
-    @client = @service_address.user
-    @service_job = @service_address.service_jobs.new
+
+    redirect_to [:new, :admin, :service_job, service_address_token: @service_address]
   end
 
   def new
