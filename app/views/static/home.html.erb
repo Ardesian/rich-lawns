@@ -5,7 +5,7 @@
       <p>Lawn Care Specialists</p>
       <div class="homepage-btns">
         <% if user_signed_in? %>
-          <%= link_to "Account", account_path, class: "orange btn" %>
+          <%= link_to "Account", :account, class: "orange btn" %>
         <% else %>
           <%= link_to "Sign Up", new_user_registration_path, class: "orange btn" %>
         <% end %>

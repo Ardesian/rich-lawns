@@ -1,4 +1,6 @@
 class Admin::ServiceJobsController < Admin::BaseController
+  before_action :set_service_job
+
   def index
     @service_jobs = ServiceJob.order(created_at: :desc)
   end
@@ -17,6 +19,8 @@ class Admin::ServiceJobsController < Admin::BaseController
     end
   end
 
+  private
+
   def service_job_params
     params.require(:service_job).permit(
       :date,
@@ -29,5 +33,9 @@ class Admin::ServiceJobsController < Admin::BaseController
         :time_in_minutes,
       ]
     )
+  end
+
+  def set_service_job
+    @service_job = ServiceJob.find(params[:id])
   end
 end

@@ -3,13 +3,13 @@
     <div class="container-title">Account</div>
     <div class="content">
       <% if current_user.admin? %>
-        <p class="text-center" style="margin-top: 0;">
+        <div class="btn-spread text-center">
           <%= link_to "Admin", [:admin, :service_addresses], class: :btn %>
-        </p>
+        </div>
       <% end %>
 
       <div class="content-label">Account Details</div>
-      <%= link_to edit_account_path, class: :cell do %>
+      <%= link_to edit_:account, class: :cell do %>
         <h3><%= current_user.name %></h3>
         <small>Contact: <%= current_user.email %> | <%= current_user.phone %></small> <br>
         <small><i>(Click to edit)</i></small>

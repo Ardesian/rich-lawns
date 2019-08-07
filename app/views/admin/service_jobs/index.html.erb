@@ -2,12 +2,13 @@
   <div class="central-container">
     <div class="container-title">Service History</div>
     <div class="content">
-      <p><%= link_to "Back", [:admin, :service_addresses], class: :btn %></p>
+      <div class="btn-spread">
+        <%= link_to "Back", [:admin, :service_addresses], class: :btn %>
+      </div>
 
       <div class="content-label">Service Jobs</div>
       <% @service_jobs.each do |service_job| %>
-        <%#= link_to [:admin, service_job], class: :cell do %>
-        <%= content_tag :div, class: :cell do %>
+        <%= link_to [:admin, service_job], class: :cell do %>
           <% service_address = service_job.service_address %>
           <h3><%= service_address.name.presence || service_address.address %></h3>
           <small>

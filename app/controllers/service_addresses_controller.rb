@@ -11,7 +11,7 @@ class ServiceAddressesController < ApplicationController
     @service_address = current_user.service_addresses.current.new(service_address_params)
 
     if @service_address.save
-      redirect_to account_path
+      redirect_to :account
     else
       render :form
     end
@@ -23,7 +23,7 @@ class ServiceAddressesController < ApplicationController
 
   def update
     if @service_address.update(service_address_params)
-      redirect_to account_path
+      redirect_to :account
     else
       render :form
     end
@@ -31,9 +31,9 @@ class ServiceAddressesController < ApplicationController
 
   def destroy
     if @service_address.update(removed_at: Time.current)
-      redirect_to account_path
+      redirect_to :account
     else
-      redirect_to account_path, alert: "Something went wrong."
+      redirect_to :account, alert: "Something went wrong."
     end
   end
 

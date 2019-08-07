@@ -44,6 +44,6 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     flash.alert.clear if request.referrer.nil?
-    account_path
+    :account
   end
 end

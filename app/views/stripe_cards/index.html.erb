@@ -2,7 +2,10 @@
   <div class="central-container">
     <div class="container-title">Billing Information</div>
     <div class="content">
-      <p><%= link_to "Account", account_path, class: :btn %></p>
+      <div class="btn-spread">
+        <%= link_to "Account", :account, class: :btn %>
+      </div>
+
       <% @stripe_cards.each do |stripe_card| %>
         <%= link_to edit_stripe_card_path(stripe_card), class: :cell do %>
           <% if stripe_card.name.present? %>
