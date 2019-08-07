@@ -43,7 +43,7 @@
             </div>
             <% if @service_address.persisted? %>
               <div class="actions">
-                <%= link_to "Remove Address", service_address_path(@service_address), class: "btn danger", method: :delete %>
+                <%= link_to "Remove Address", [:admin, @service_address], class: "btn danger", method: :delete %>
               </div>
             <% end %>
           </div>

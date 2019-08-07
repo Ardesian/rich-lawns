@@ -40,9 +40,9 @@ class Admin::ServiceAddressesController < Admin::BaseController
 
   def destroy
     if @service_address.update(removed_at: Time.current)
-      redirect_to [:admin, @service_address]
+      redirect_to [:admin, :service_addresses]
     else
-      redirect_to [:admin, :service_addresses], alert: "Something went wrong."
+      redirect_to [:admin, @service_address], alert: "Something went wrong."
     end
   end
 
