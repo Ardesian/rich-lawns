@@ -8,13 +8,14 @@ module Dollarable
       end
 
       define_method("#{dollar_column}=") do |new_dollars|
-        send("#{penny_column}=", (new_dollars.to_i * 100))
+        send("#{penny_column}=", (new_dollars.to_f * 100))
       end
     end
 
     def self.pennies_to_dollars(pennies)
       return unless pennies.present?
-      (pennies.to_i / 100.to_f).round(2)
+      dollars = (pennies.to_i / 100.to_f).round(2)
+      dollars == dollars.to_i ? dollars.round : dollars
     end
 
     delegate :pennies_to_dollars, to: :class

@@ -5,17 +5,38 @@ class Admin::ServiceJobsController < Admin::BaseController
     @service_jobs = ServiceJob.order(created_at: :desc)
   end
 
+  def new
+    @service_address = ServiceAddress.find_by!(token: params[:service_address_token])
+    @client = @service_address.user
+    @service_job = @service_address.service_jobs.new
+
+    render :form
+  end
+
+  def edit
+    render :form
+  end
+
   def create
     @service_address = ServiceAddress.find_by!(token: params[:service_address_token])
     @client = @service_address.user
-    @service_job = @service_address.service_jobs.new(service_job_params)
+    @service_job = @service_address.service_jobs.new(adjusted_service_job_params)
 
     if @service_job.save
       @service_address.serviced!
       redirect_to [:admin, :service_addresses], notice: "Job complete. 👍"
     else
       flash.now[:alert] = "Failed to save. Please try again."
-      render "admin/service_addresses/show"
+      render :form
+    end
+  end
+
+  def update
+    if @service_job.update(adjusted_service_job_params)
+      redirect_to [:admin, @service_job], notice: "Job updated."
+    else
+      flash.now[:alert] = "Failed to save. Please try again."
+      render :form
     end
   end
 
@@ -46,6 +67,17 @@ class Admin::ServiceJobsController < Admin::BaseController
 
   private
 
+  def adjusted_service_job_params
+    new_params = service_job_params.dup
+    new_params[:service_items_attributes].tap do |item_params|
+      item_params.each do |item_attrs|
+        item_attrs.merge!(_destroy: true) if item_attrs[:unit_count].to_f.zero?
+      end
+    end
+
+    new_params
+  end
+
   def service_job_params
     params.require(:service_job).permit(
       :date,
@@ -54,8 +86,8 @@ class Admin::ServiceJobsController < Admin::BaseController
         :id,
         :_destroy,
         :description,
-        :cost_in_pennies,
-        :time_in_minutes,
+        :unit_count,
+        :unit_cost_in_dollars
       ]
     )
   end

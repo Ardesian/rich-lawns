@@ -20,12 +20,12 @@ class Invoice < ApplicationRecord
   has_many :service_jobs
   has_many :service_items, through: :service_jobs
 
-  def total_in_pennies
-    service_items.sum(:total_in_pennies)
+  def cost_in_pennies
+    service_items.sum(:cost_in_pennies)
   end
 
-  def total_in_dollars
-    pennies_to_dollars(total_in_pennies)
+  def cost_in_dollars
+    pennies_to_dollars(cost_in_pennies)
   end
 
   def pending?

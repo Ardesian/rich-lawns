@@ -44,7 +44,8 @@ class ServiceJob < ApplicationRecord
   end
 
   def generate_invoice
-    invoice = service_address.user.invoices.create
+    invoices = service_address.user.invoices
+    invoice = invoices.find_by(paid_at: nil) || invoices.create
     update(invoice: invoice)
     invoice
   end

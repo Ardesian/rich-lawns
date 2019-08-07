@@ -1,6 +1,7 @@
-$(".ctr-service_addresses.act-show").ready(function() {
+$(".ctr-service_jobs").ready(function() {
   var duplicateOtherRow = function() {
     var template = document.querySelector("#extra-jobs-template")
+    if (!template) { return }
     var content = document.importNode(template.content, true)
     $(".extra-jobs").append(content)
   }

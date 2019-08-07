@@ -18,15 +18,10 @@ class ServiceItem < ApplicationRecord
 
   scope :not_default, -> { where.not(description: ServiceJob.default_service_item_names) }
 
-  validates :unit_count, :unit_cost_in_pennies, :cost_in_pennies, presence: true
   before_validation :set_cost
 
   dollarable(:unit_count_fraction, :unit_count)
   dollarable(:unit_cost_in_pennies, :unit_cost_in_dollars)
-
-  def cost_in_pennies
-    unit_count.to_i * unit_cost_in_pennies.to_i
-  end
 
   def cost_in_dollars
     pennies_to_dollars(cost_in_pennies)
@@ -35,6 +30,7 @@ class ServiceItem < ApplicationRecord
   private
 
   def set_cost
-    self.cost_in_pennies = unit_count.to_i * unit_cost_in_pennies.to_i
+    self.cost_in_pennies = (unit_count.to_f * unit_cost_in_pennies.to_i).round
   end
+
 end

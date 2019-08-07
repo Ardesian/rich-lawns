@@ -9,8 +9,11 @@
       border-radius: 8px;
       padding: 5px;
     }
-    td.units, td.unit-count, td.text-right {
+    td.text-right {
       text-align: right;
+    }
+    td.no-border {
+      border: none;
     }
   </style>
 <% end %>
@@ -21,17 +24,22 @@
       <th>Description</th>
       <th>Units</th>
       <th>Unit Cost</th>
+      <th>Unit Total</th>
     </tr>
     <% invoice.service_items.each do |item| %>
       <tr>
         <td class="description"><%= item.description %></td>
-        <td class="units"><%= item.time_in_minutes %></td>
-        <td class="unit-count"><%= number_to_currency(item.cost_in_dollars) %></td>
+        <td class="text-right units"><%= item.unit_count %></td>
+        <td class="text-right unit-count"><%= number_to_currency(item.unit_cost_in_dollars) %></td>
+        <td class="text-right unit-total"><%= number_to_currency(item.cost_in_dollars) %></td>
       </tr>
     <% end %>
     <tr>
-      <td colspan="2" class="total">Total</td>
-      <td class="unit-count"><%= number_to_currency(invoice.total_in_dollars) %></td>
+      <td colspan="4" class="no-border"></td>
+    </tr>
+    <tr>
+      <td colspan="3" class="total">Total</td>
+      <td class="text-right unit-total"><%= number_to_currency(invoice.cost_in_dollars) %></td>
     </tr>
   </table>
 </div>

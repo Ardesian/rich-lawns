@@ -1,8 +1,12 @@
 <% service_job ||= @service_job %>
 
-<% service_job.default_service_item_names.each do |service_name| %>
-  <% item = service_job.service_items.find_or_initialize_by(description: service_name) %>
-  <%= render partial: "admin/service_items/show", locals: { item: item } %>
+<% service_items = service_job.service_items.to_a %>
+<% service_job.default_services.each do |service_name, service_cost| %>
+  <%=
+    item = service_items.find { |service_item| service_item.description == service_name } || service_job.service_items.new(description: service_name)
+    item.unit_cost_in_dollars ||= service_cost
+    render partial: "admin/service_items/show", locals: { item: item }
+  %>
 <% end %>
 
 <template id="extra-jobs-template">
