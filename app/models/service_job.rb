@@ -12,21 +12,27 @@
 #
 
 class ServiceJob < ApplicationRecord
+  include Dollarable
   belongs_to :invoice, optional: true
   belongs_to :service_address
   has_many :service_items
 
   accepts_nested_attributes_for :service_items, allow_destroy: true
 
-  def self.default_service_item_names
-    [
-      "Mowing",
-      "Weeding",
-      "Hedging",
-      "Tree/shrub removal",
-      "Clean up"
-    ]
+  def self.default_services
+    {
+      "Mowing"             => 25,
+      "Weeding"            => 20,
+      "Hedging"            => 20,
+      "Tree/shrub removal" => 20,
+      "Clean up"           => 20
+    }
   end
+
+  def self.default_service_item_names
+    default_services.keys
+  end
+  delegate :default_services, to: :class
   delegate :default_service_item_names, to: :class
 
   def cost_in_pennies
@@ -34,7 +40,7 @@ class ServiceJob < ApplicationRecord
   end
 
   def cost_in_dollars
-    (cost_in_pennies / 100.to_f).round(2)
+    pennies_to_dollars(cost_in_pennies)
   end
 
   def generate_invoice

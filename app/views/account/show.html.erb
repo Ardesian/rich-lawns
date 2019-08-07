@@ -9,7 +9,7 @@
       <% end %>
 
       <div class="content-label">Account Details</div>
-      <%= link_to edit_:account, class: :cell do %>
+      <%= link_to [:edit, :account], class: :cell do %>
         <h3><%= current_user.name %></h3>
         <small>Contact: <%= current_user.email %> | <%= current_user.phone %></small> <br>
         <small><i>(Click to edit)</i></small>

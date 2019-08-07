@@ -7,7 +7,7 @@ class AlterTables < ActiveRecord::Migration[5.2]
 
     remove_column :service_items, :cost_in_pennies, :integer
     remove_column :service_items, :time_in_minutes, :integer
-    add_column :service_items, :unit_count, :integer
+    add_column :service_items, :unit_count_fraction, :integer
     add_column :service_items, :unit_cost_in_pennies, :integer
     add_column :service_items, :cost_in_pennies, :integer
 

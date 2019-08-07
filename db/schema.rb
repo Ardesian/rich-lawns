@@ -109,7 +109,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_034946) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "unit_count"
+    t.integer "unit_count_fraction"
     t.integer "unit_cost_in_pennies"
     t.integer "cost_in_pennies"
     t.index ["service_job_id"], name: "index_service_items_on_service_job_id"

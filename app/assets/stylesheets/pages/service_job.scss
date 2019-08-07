@@ -1,8 +1,11 @@
+.form-field.small-field {
+  width: 100px;
+}
 .form-field[data-fa] {
   width: 150px;
 
   input { padding-left: 25px; }
-  &:after {
+  &:before {
     position: absolute;
     top: 50%;
     left: 5px;
@@ -10,8 +13,19 @@
     height: 100%;
     color: #A9A9A9;
     font-family: "Font Awesome\ 5 Free";
-    content: "A";
+    content: "";
   }
-  &[data-fa=clock]:after { content: "\f017"; }
-  &[data-fa=money]:after { content: "\f155"; }
+  &[data-fa=clock]:before { content: "\f017"; }
+  &[data-fa=money]:before { content: "\f155"; }
+}
+.form-field[data-after] {
+  &:after {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    margin-top: -10px;
+    height: 100%;
+    color: #A9A9A9;
+    content: attr(data-after);
+  }
 }

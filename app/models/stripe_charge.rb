@@ -14,12 +14,15 @@
 
 class StripeCharge < ApplicationRecord
   include Tokenable
+  include Dollarable
   belongs_to :stripe_card, required: true
   has_many :service_jobs
 
   scope :success, -> { where.not(charged_at: nil) }
   scope :failed, -> { where.not(payment_error: ['', nil]).where(charged_at: nil) }
   scope :pending, -> { where(charged_at: nil, payment_error: ['', nil]) }
+
+  dollarable(:cost_in_pennies, :cost_in_dollars)
 
   def charged?; charged_at?; end
   def success?; charged?; end
@@ -28,10 +31,6 @@ class StripeCharge < ApplicationRecord
 
   def retry
     charge
-  end
-
-  def cost_in_dollars
-    (cost_in_pennies.to_i / 100.to_f).round(2)
   end
 
   def charge
