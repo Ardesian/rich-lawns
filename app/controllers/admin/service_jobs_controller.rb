@@ -36,6 +36,6 @@ class Admin::ServiceJobsController < Admin::BaseController
   end
 
   def set_service_job
-    @service_job = ServiceJob.find(params[:id])
+    @service_job = ServiceJob.find(params[:id]) if params[:id].present?
   end
 end

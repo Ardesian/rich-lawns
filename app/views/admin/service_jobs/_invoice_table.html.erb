@@ -1,0 +1,38 @@
+<%= content_for(:style) do %>
+  <style>
+    th { text-align: left; }
+    table {
+      border-spacing: 7px;
+    }
+    td {
+      border: 1px solid grey;
+      border-radius: 8px;
+      padding: 5px;
+    }
+    td.units, td.unit-count, td.text-right {
+      text-align: right;
+    }
+  </style>
+<% end %>
+
+<div class="cell">
+  <table style="width: 100%">
+    <tr>
+      <th>Description</th>
+      <th>Units</th>
+      <th>Unit Count</th>
+    </tr>
+    <% service_job.service_items.each do |item| %>
+      <% next if item.skippable? %>
+      <tr>
+        <td class="description"><%= item.description %></td>
+        <td class="units"><%= item.time_in_minutes %></td>
+        <td class="unit-count"><%= number_to_currency(item.cost) %></td>
+      </tr>
+    <% end %>
+    <tr>
+      <td colspan="2" class="total">Total</td>
+      <td class="unit-count"><%= number_to_currency(service_job.cost) %></td>
+    </tr>
+  </table>
+</div>

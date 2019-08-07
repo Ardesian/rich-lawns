@@ -1,0 +1,12 @@
+<% item ||= ServiceItem.new %>
+<div class="inline-fields">
+  <div class="form-field">
+    <%= text_field_tag "service_job[service_items_attributes][][description]", item.description, placeholder: "Other", class: "other-field" %>
+  </div>
+  <div class="form-field" data-fa="clock">
+    <%= text_field_tag "service_job[service_items_attributes][][time_in_minutes]", item.time_in_minutes, placeholder: "minutes"  %>
+  </div>
+  <div class="form-field" data-fa="money">
+    <%= text_field_tag "service_job[service_items_attributes][][cost_in_dollars]", item.cost_in_dollars %>
+  </div>
+</div>

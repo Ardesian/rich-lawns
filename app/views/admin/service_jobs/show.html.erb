@@ -7,26 +7,29 @@
       </div>
 
       <div class="content-label">Service Job</div>
-        <%= content_tag :div, class: :cell do %>
-          <% service_address = @service_job.service_address %>
-          <h3><%= service_address.name.presence || service_address.address %></h3>
-          <small>
+      <%= content_tag :div, class: :cell do %>
+        <% service_address = @service_job.service_address %>
+        <h3><%= service_address.name.presence || service_address.address %></h3>
+        <small>
+          <p>
+            Amount:
+            <strong><%= number_to_currency(@service_job.cost) || "N/A" %></strong>
+          </p>
+          <p>
+            Date:
+            <strong><%= @service_job.created_at.local.to_formatted_s(:simple_with_time) %></strong>
+          </p>
+          <% if @service_job.notes.present? %>
             <p>
-              Amount:
-              <strong><%= number_to_currency(@service_job.cost) || "N/A" %></strong>
+              Notes:
+              <%= @service_job.notes %>
             </p>
-            <p>
-              Date:
-              <strong><%= @service_job.created_at.local.to_formatted_s(:simple_with_time) %></strong>
-            </p>
-            <% if @service_job.notes.present? %>
-              <p>
-                Notes:
-                <%= @service_job.notes %>
-              </p>
-            <% end %>
-          </small>
+          <% end %>
+        </small>
       <% end %>
+
+      <div class="content-label">Invoice</div>
+      <%= render partial: "admin/service_jobs/invoice_table", locals: { service_job: @service_job } %>
 
     </div>
   </div>

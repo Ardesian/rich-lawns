@@ -16,6 +16,10 @@ class ServiceItem < ApplicationRecord
 
   scope :not_default, -> { where.not(description: ServiceJob.default_service_item_names) }
 
+  def skippable?
+    cost_in_pennies.blank? && time_in_minutes.blank?
+  end
+
   def cost_per_hour
     25
   end
@@ -25,8 +29,8 @@ class ServiceItem < ApplicationRecord
   end
 
   def cost # pennies
+    return 0 if skippable?
     return cost_in_pennies if cost_in_pennies.present?
-    return 0 if time_in_minutes.blank?
     (cost_per_minute * time_in_minutes).round
   end
 

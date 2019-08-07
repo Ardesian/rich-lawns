@@ -1,6 +1,8 @@
 class UserMailer < ApplicationMailer
-  def invoice(recipient)
+  def invoice(recipient, service_job)
     @title = "Thank you for using our services!"
+    @service_job = service_job
+
     mail(
       to: recipient,
       from: "billing@rich-lawns.com",
@@ -22,6 +24,7 @@ class UserMailer < ApplicationMailer
 
   def deliver_email(email_id)
     email = Email.find(email_id).to_mail
+    
     mail(
       to: email.to,
       from: email.from,
