@@ -16,30 +16,20 @@ class ServiceItem < ApplicationRecord
 
   scope :not_default, -> { where.not(description: ServiceJob.default_service_item_names) }
 
-  def skippable?
-    cost_in_pennies.blank? && time_in_minutes.blank?
-  end
+  validates :unit_count, :unit_cost_in_pennies, :cost_in_pennies, presence: true
+  before_validation :set_cost
 
-  def cost_per_hour
-    25
-  end
-
-  def cost_per_minute
-    cost_per_hour / 60.to_f
-  end
-
-  def cost # pennies
-    return 0 if skippable?
-    return cost_in_pennies if cost_in_pennies.present?
-    (cost_per_minute * time_in_minutes).round
-  end
-
-  def cost_in_dollars=(new_cost)
-    (new_cost / 100.to_f).round
+  def cost_in_pennies
+    unit_count.to_i * unit_cost_in_pennies.to_i
   end
 
   def cost_in_dollars
-    return unless cost_in_pennies.present?
-    (cost_in_pennies.to_i * 100.to_f).round(2)
+    (cost_in_pennies / 100.to_f).round(2)
+  end
+
+  private
+
+  def set_cost
+    self.cost_in_pennies = unit_count.to_i * unit_cost_in_pennies.to_i
   end
 end

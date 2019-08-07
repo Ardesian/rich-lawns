@@ -19,7 +19,7 @@
 #   belongs_to :service_address
 #   belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending
 #
-#   delegate :cost, to: :stripe_charge, allow_nil: true
+#   delegate :cost_in_dollars, to: :stripe_charge, allow_nil: true
 #
 #   def charge; 30; end
 #   def charge=(dollars)
@@ -29,7 +29,7 @@
 #   def charge_amount_in_pennies(amount_in_pennies)
 #     new_charge = user.try(:default_payment_card)&.charge(amount_in_pennies)
 #     if new_charge.success?
-#       SlackNotifier.notify("Successfully charged: #{user.name} $#{cost} | #{notes}")
+#       SlackNotifier.notify("Successfully charged: #{user.name} $#{cost_in_dollars} | #{notes}")
 #     else
 #       SlackNotifier.notify("Failed to charge: #{new_charge.payment_error}")
 #     end

@@ -20,19 +20,18 @@
     <tr>
       <th>Description</th>
       <th>Units</th>
-      <th>Unit Count</th>
+      <th>Unit Cost</th>
     </tr>
-    <% service_job.service_items.each do |item| %>
-      <% next if item.skippable? %>
+    <% invoice.service_items.each do |item| %>
       <tr>
         <td class="description"><%= item.description %></td>
         <td class="units"><%= item.time_in_minutes %></td>
-        <td class="unit-count"><%= number_to_currency(item.cost) %></td>
+        <td class="unit-count"><%= number_to_currency(item.cost_in_dollars) %></td>
       </tr>
     <% end %>
     <tr>
       <td colspan="2" class="total">Total</td>
-      <td class="unit-count"><%= number_to_currency(service_job.cost) %></td>
+      <td class="unit-count"><%= number_to_currency(invoice.total_in_dollars) %></td>
     </tr>
   </table>
 </div>

@@ -30,7 +30,7 @@ class StripeCharge < ApplicationRecord
     charge
   end
 
-  def cost
+  def cost_in_dollars
     (cost_in_pennies.to_i / 100.to_f).round(2)
   end
 

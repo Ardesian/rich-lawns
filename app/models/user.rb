@@ -25,6 +25,7 @@ class User < ApplicationRecord
   include Moddable
 
   has_many :service_addresses
+  has_many :invoices
   has_many :stripe_cards
   has_many :sent_emails, class_name: "Email", foreign_key: :sent_by_id, dependent: :destroy
 

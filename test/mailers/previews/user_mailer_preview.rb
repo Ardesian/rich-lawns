@@ -11,7 +11,7 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def invoice
-    UserMailer.invoice("rocco@rdjn.me", ServiceJob.last)
+    UserMailer.invoice(Invoice.last)
   end
 
 end

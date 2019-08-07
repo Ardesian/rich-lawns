@@ -1,15 +1,4 @@
 class UserMailer < ApplicationMailer
-  def invoice(recipient, service_job)
-    @title = "Thank you for using our services!"
-    @service_job = service_job
-
-    mail(
-      to: recipient,
-      from: "billing@rich-lawns.com",
-      subject: "Thank you for using our services!"
-    )
-  end
-
   def email(opts)
     @title = opts[:subject]
     @body = opts[:body]
@@ -24,13 +13,24 @@ class UserMailer < ApplicationMailer
 
   def deliver_email(email_id)
     email = Email.find(email_id).to_mail
-    
+
     mail(
       to: email.to,
       from: email.from,
       subject: email.subject,
       content_type: "text/html",
       body: email.body.raw_source
+    )
+  end
+
+  def invoice(invoice)
+    @title = "Thank you for using our services!"
+    @invoice = invoice
+
+    mail(
+      to: @invoice.recipient,
+      from: "billing@rich-lawns.com",
+      subject: "Thank you for using our services!"
     )
   end
 end

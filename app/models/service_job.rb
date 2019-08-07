@@ -29,9 +29,17 @@ class ServiceJob < ApplicationRecord
   end
   delegate :default_service_item_names, to: :class
 
-  def cost
-    service_items.map do |item|
-      item.cost
-    end.sum
+  def cost_in_pennies
+    service_items.sum(:cost_in_pennies)
+  end
+
+  def cost_in_dollars
+    (cost_in_pennies / 100.to_f).round(2)
+  end
+
+  def generate_invoice
+    invoice = service_address.user.invoices.create
+    update(invoice: invoice)
+    invoice
   end
 end
