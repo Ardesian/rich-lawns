@@ -6,10 +6,6 @@ class Admin::ServiceJobsController < Admin::BaseController
   end
 
   def new
-    @service_address = ServiceAddress.find_by!(token: params[:service_address_token])
-    @client = @service_address.user
-    @service_job = @service_address.service_jobs.new
-
     render :form
   end
 
@@ -18,10 +14,6 @@ class Admin::ServiceJobsController < Admin::BaseController
   end
 
   def create
-    @service_address = ServiceAddress.find_by!(token: params[:service_address_token])
-    @client = @service_address.user
-    @service_job = @service_address.service_jobs.new(adjusted_service_job_params)
-
     if @service_job.save
       @service_address.serviced!
       redirect_to [:admin, :service_addresses], notice: "Job complete. 👍"
@@ -42,6 +34,7 @@ class Admin::ServiceJobsController < Admin::BaseController
 
   def deliver_invoice
     @invoice = @service_job.invoice || @service_job.generate_invoice
+    @invoice.update(sent_to_email: params[:invoice_recipient])
 
     if @invoice.recipient.present?
       UserMailer.invoice(@invoice).deliver_later
@@ -68,6 +61,8 @@ class Admin::ServiceJobsController < Admin::BaseController
   private
 
   def adjusted_service_job_params
+    return unless params[:service_job].present?
+
     new_params = service_job_params.dup
     new_params[:service_items_attributes].tap do |item_params|
       item_params.each do |item_attrs|
@@ -93,10 +88,19 @@ class Admin::ServiceJobsController < Admin::BaseController
   end
 
   def set_service_job
-    return unless params[:id].present?
+    if params[:id].present?
+      @service_job = ServiceJob.find(params[:id])
+      @service_address = @service_job.service_address
 
-    @service_job = ServiceJob.find(params[:id])
-    @service_address = @service_job.service_address
-    @client = @service_address.user
+      @client = @service_address.user
+      @invoice = @service_job.invoice
+    elsif params[:service_address_token].present?
+      @service_address = ServiceAddress.find_by!(token: params[:service_address_token])
+      @service_job = @service_address.service_jobs.new(adjusted_service_job_params)
+
+      @client = @service_address.user
+      @invoice = @service_job.invoice
+    end
+
   end
 end

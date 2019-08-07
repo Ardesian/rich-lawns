@@ -37,12 +37,22 @@
         <% else %>
           <h3>Client not added yet.</h3>
         <% end %>
-      <% end %>
+        <% if @invoice.try(:paid?) %>
+          <p class="text-right">
+            Invoice paid: <%= @invoice.paid_at.to_formatted_s(:simple_with_time) %>
+          </p>
+        <% else %>
+          <p class="text-right">
+            <%= link_to "Mark as Paid", [:mark_paid, :admin, @service_job], class: "btn", method: :post %>
+          </p>
 
-      <div class="btn-spread">
-        <%= link_to "Deliver Invoice", [:deliver_invoice, :admin, @service_job], class: :btn, method: :post %>
-        <%= link_to "Mark as Paid", [:mark_paid, :admin, @service_job], class: "btn float-right", method: :post %>
-      </div>
+          <%= form_tag [:deliver_invoice, :admin, @service_job] do %>
+            <small>Email to deliver invoice to:</small>
+            <%= text_field_tag :invoice_recipient, @service_job.invoice.try(:recipient) || @service_job.user.try(:email) %>
+            <%= submit_tag "Deliver Invoice" %>
+          <% end %>
+        <% end %>
+      <% end %>
 
       <div class="content-label">Invoice</div>
       <%= render partial: "admin/service_jobs/invoice_table", locals: { invoice: (@service_job.invoice || @service_job) } %>

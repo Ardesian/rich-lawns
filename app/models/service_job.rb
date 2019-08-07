@@ -17,6 +17,8 @@ class ServiceJob < ApplicationRecord
   belongs_to :service_address
   has_many :service_items
 
+  delegate :user, to: :service_address
+
   accepts_nested_attributes_for :service_items, allow_destroy: true
 
   def self.default_services
@@ -44,8 +46,9 @@ class ServiceJob < ApplicationRecord
   end
 
   def generate_invoice
-    invoices = service_address.user.invoices
-    invoice = invoices.find_by(paid_at: nil) || invoices.create
+    invoices = user.try(:invoices)
+    invoice = invoices&.find_by(paid_at: nil) || invoices&.create
+    invoice ||= Invoice.create
     update(invoice: invoice)
     invoice
   end
