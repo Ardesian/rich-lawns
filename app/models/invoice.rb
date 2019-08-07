@@ -7,6 +7,10 @@
 #  stripe_charge_id :bigint
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  paid_at          :datetime
+#  sent_at          :datetime
+#  sent_to_email    :string
+#  token            :string
 #
 
 class Invoice < ApplicationRecord

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_18_235226) do
+ActiveRecord::Schema.define(version: 2019_08_07_034946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,10 @@ ActiveRecord::Schema.define(version: 2019_07_18_235226) do
     t.bigint "stripe_charge_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "paid_at"
+    t.datetime "sent_at"
+    t.string "sent_to_email"
+    t.string "token"
     t.index ["stripe_charge_id"], name: "index_invoices_on_stripe_charge_id"
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
@@ -103,10 +107,11 @@ ActiveRecord::Schema.define(version: 2019_07_18_235226) do
   create_table "service_items", force: :cascade do |t|
     t.bigint "service_job_id"
     t.string "description"
-    t.integer "cost_in_pennies"
-    t.integer "time_in_minutes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_count"
+    t.integer "unit_cost_in_pennies"
+    t.integer "cost_in_pennies"
     t.index ["service_job_id"], name: "index_service_items_on_service_job_id"
   end
 

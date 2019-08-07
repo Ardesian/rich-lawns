@@ -2,13 +2,14 @@
 #
 # Table name: service_items
 #
-#  id              :bigint           not null, primary key
-#  service_job_id  :bigint
-#  description     :string
-#  cost_in_pennies :integer
-#  time_in_minutes :integer
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id                   :bigint           not null, primary key
+#  service_job_id       :bigint
+#  description          :string
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  unit_count           :integer
+#  unit_cost_in_pennies :integer
+#  cost_in_pennies      :integer
 #
 
 class ServiceItem < ApplicationRecord
