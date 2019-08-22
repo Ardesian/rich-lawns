@@ -2,7 +2,7 @@
   display: none;
 }
 
-.parsley-error {
+.parsley-error, .field_with_errors input {
   background: $parsley-error-color;
 }
 

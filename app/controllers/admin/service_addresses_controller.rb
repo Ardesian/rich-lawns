@@ -3,6 +3,12 @@ class Admin::ServiceAddressesController < Admin::BaseController
 
   def index
     @service_addresses = ServiceAddress.current.order(last_service: :desc, id: :desc)
+
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @service_addresses }
+    end
   end
 
   def show
