@@ -27,10 +27,6 @@ $(".ctr-service_addresses.act-index").ready(function() {
       return parseInt($(span).attr("data-relevance") || 0)
     })
     return Math.max.apply(null, relevances)
-    // return $(spans).reduce(function(max, span, idx, allSpans) {
-    //   var spanRelevance = parseInt(span.attr("data-relevance") || 0)
-    //   return max < spanRelevance ? spanRelevance : max
-    // }, 0)
   }
 
   var relevanceOfString = function(query, str) {
@@ -44,21 +40,6 @@ $(".ctr-service_addresses.act-index").ready(function() {
     })
 
     return relevance
-    // var optionText = ele.text.toLowerCase(), optionVal = ele.value.toLowerCase(), string_valid = true
-    // if (foundCount < dropdownMaxValues) {
-    //   $(search_string.split('')).each(function() {
-    //     var char_index = optionText.indexOf(this)
-    //     if (char_index < 0) {
-    //       string_valid = false
-    //     } else {
-    //       optionText = optionText.substr(char_index + 1)
-    //     }
-    //   })
-    //   if (string_valid) {
-    //     foundCount += 1
-    //     foundOptions.push(ele)
-    //   }
-    // }
   }
 
   var search = function(search_string)  {
