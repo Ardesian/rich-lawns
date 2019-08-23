@@ -14,11 +14,20 @@
 
       <div class="content-label">Service Addresses</div>
       <div class="text-center">
-        <p><%= link_to "New Service Address", new_admin_service_address_path, class: :btn %></p>
+        <p><%= link_to "New Service Address", new_admin_service_address_path, class: "btn auto-fill-service-address" %></p>
+        <%= text_field_tag :service_addresses, "", class: "search-service-addresses", placeholder: "Search", autocomplete: :off %>
+        <br><br>
       </div>
       <% @service_addresses.each do |service_address| %>
-        <%= link_to [:new, :admin, :service_job, service_address_token: service_address], class: :cell do %>
-          <h3><%= service_address.name.presence || service_address.address %></h3>
+        <%= link_to [:new, :admin, :service_job, service_address_token: service_address], class: "cell address-card", data: { lastService: service_address.last_service.to_i, relevance: 0 } do %>
+          <span class="hidden searchable"><%= service_address.name %></span>
+          <span class="hidden searchable"><%= service_address.address %></span>
+          <% if service_address.name.present? %>
+            <h3><%= service_address.name.presence %></h3>
+            <span><%= service_address.address %></span> <br>
+          <% else %>
+            <h3><%= service_address.address %></h3>
+          <% end %>
           <small>
             <%= service_address.frequency.titleize %> <br>
             Last Service:
