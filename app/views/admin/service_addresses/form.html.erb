@@ -6,7 +6,7 @@
         <%= link_to "Back", [:admin, :service_addresses], class: :btn %>
       </div>
 
-      <%= form_for [:admin, @service_address], data: parsley(:validate, trigger: :blur) do |f| %>
+      <%= form_for [:admin, @service_address] do |f| %>
         <%= render partial: "layouts/error_container", locals: { resource: @service_address } %>
         <div class="cell">
 
@@ -17,24 +17,24 @@
 
           <div class="form-field">
             <%= f.label :address, "Street Address" %>
-            <%= f.text_field :address, data: parsley(:required) %>
+            <%= f.text_field :address %>
           </div>
 
           <div class="inline-fields">
             <div class="form-field">
               <%= f.label :city %>
-              <%= f.text_field :city, data: parsley(:required) %>
+              <%= f.text_field :city %>
             </div>
 
             <div class="form-field" style="width: 100px;">
               <%= f.label :zip %>
-              <%= f.text_field :zip, data: parsley(:required) %>
+              <%= f.text_field :zip %>
             </div>
           </div>
 
           <div class="form-field">
             <%= f.label :frequency %>
-            <%= f.select :frequency, ServiceAddress.select_frequencies, data: parsley(:required) %>
+            <%= f.select :frequency, ServiceAddress.select_frequencies %>
           </div>
 
           <div class="text-center">

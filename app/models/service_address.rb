@@ -21,8 +21,6 @@ class ServiceAddress < ApplicationRecord
   belongs_to :user, optional: true
   has_many :service_jobs
 
-  validates :address, :city, :zip, presence: true
-
   scope :current, -> { where(removed_at: nil) }
 
   enum frequency: {
