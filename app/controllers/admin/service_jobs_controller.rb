@@ -58,6 +58,16 @@ class Admin::ServiceJobsController < Admin::BaseController
     redirect_to [:admin, @service_job]
   end
 
+  def destroy
+    if @service_job.destroy
+      flash.notice = "Deleted job."
+    else
+      flash.alert = "Failed to delete."
+    end
+
+    redirect_to [:admin, :service_jobs]
+  end
+
   private
 
   def adjusted_service_job_params

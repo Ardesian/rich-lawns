@@ -3,7 +3,11 @@
     <div class="container-title">Client</div>
     <div class="content">
       <div class="btn-spread">
-        <%= link_to "Back", [:admin, :service_addresses], class: :btn %>
+        <% if @service_job.persisted? %>
+          <%= link_to "Back", [:admin, @service_job], class: :btn %>
+        <% else %>
+          <%= link_to "Back", [:admin, :service_addresses], class: :btn %>
+        <% end %>
         <%= link_to "Edit", [:edit, :admin, @service_address], class: "btn float-right" %>
       </div>
 
@@ -42,6 +46,12 @@
           </div>
         <% end %>
       <% end %>
+
+      <div class="cell text-center">
+        <% if @service_job.persisted? %>
+          <%= link_to "Delete", [:admin, @service_job], class: "btn danger", method: :delete, data: { confirm: "Are you sure you want to delete this job?" } %>
+        <% end %>
+      </div>
 
     </div>
   </div>
