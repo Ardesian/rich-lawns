@@ -18,9 +18,16 @@
   </style>
 <% end %>
 
-<div class="cell">
-  <p>Month of August</p>
-</div>
+<% jobs = invoice.service_jobs.order(:serviced_at) %>
+
+<% notes = jobs.pluck(:notes).map(&:presence).compact %>
+<% if notes.any? %>
+  <div class="cell">
+    <% notes.each do |note| %>
+      <p><%= note %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <div class="cell">
   <table style="width: 100%">
@@ -30,13 +37,15 @@
       <th>Unit Cost</th>
       <th>Unit Total</th>
     </tr>
-    <% invoice.service_items.each do |item| %>
-      <tr>
-        <td class="description"><%= item.description %></td>
-        <td class="text-right units"><%= item.unit_count %></td>
-        <td class="text-right unit-count"><%= number_to_currency(item.unit_cost_in_dollars) %></td>
-        <td class="text-right unit-total"><%= number_to_currency(item.cost_in_dollars) %></td>
-      </tr>
+    <% jobs.each do |job| %>
+      <% job.service_items.order(:position).each do |item| %>
+        <tr>
+          <td class="description"><%= item.description %></td>
+          <td class="text-right units"><%= item.unit_count %></td>
+          <td class="text-right unit-count"><%= number_to_currency(item.unit_cost_in_dollars) %></td>
+          <td class="text-right unit-total"><%= number_to_currency(item.cost_in_dollars) %></td>
+        </tr>
+      <% end %>
     <% end %>
     <tr>
       <td colspan="4" class="no-border"></td>

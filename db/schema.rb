@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_07_034946) do
+ActiveRecord::Schema.define(version: 2019_08_25_163539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_034946) do
     t.integer "unit_count_fraction"
     t.integer "unit_cost_in_pennies"
     t.integer "cost_in_pennies"
+    t.integer "position"
     t.index ["service_job_id"], name: "index_service_items_on_service_job_id"
   end
 
@@ -122,6 +123,7 @@ ActiveRecord::Schema.define(version: 2019_08_07_034946) do
     t.text "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "serviced_at"
     t.index ["invoice_id"], name: "index_service_jobs_on_invoice_id"
     t.index ["service_address_id"], name: "index_service_jobs_on_service_address_id"
   end

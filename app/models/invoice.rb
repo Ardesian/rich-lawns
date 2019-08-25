@@ -37,7 +37,7 @@ class Invoice < ApplicationRecord
   end
 
   def recipient
-    sent_to_email.presence || user.email
+    sent_to_email.presence || user.try(:email)
   end
 
   def mark_paid(time=Time.current)

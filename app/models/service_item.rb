@@ -10,6 +10,7 @@
 #  unit_count_fraction  :integer
 #  unit_cost_in_pennies :integer
 #  cost_in_pennies      :integer
+#  position             :integer
 #
 
 class ServiceItem < ApplicationRecord

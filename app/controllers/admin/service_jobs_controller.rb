@@ -84,7 +84,11 @@ class Admin::ServiceJobsController < Admin::BaseController
         :unit_count,
         :unit_cost_in_dollars
       ]
-    )
+    ).tap do |whitelist|
+      whitelist[:service_items_attributes].each_with_index do |item_attrs, idx|
+        item_attrs[:position] = idx + 1
+      end
+    end
   end
 
   def set_service_job

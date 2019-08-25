@@ -55,8 +55,7 @@
       <% end %>
 
       <div class="content-label">Invoice</div>
-      <%= render partial: "admin/service_jobs/invoice_table", locals: { invoice: (@service_job.invoice || @service_job) } %>
-
+      <%= render partial: "admin/service_jobs/invoice_table", locals: { invoice: (@service_job.invoice || @service_job.generate_invoice) } %>
     </div>
   </div>
 </div>

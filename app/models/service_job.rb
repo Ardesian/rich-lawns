@@ -9,6 +9,7 @@
 #  notes              :text
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  serviced_at        :datetime
 #
 
 class ServiceJob < ApplicationRecord
@@ -16,6 +17,8 @@ class ServiceJob < ApplicationRecord
   belongs_to :invoice, optional: true
   belongs_to :service_address
   has_many :service_items
+
+  before_save :set_serviced_at
 
   delegate :user, to: :service_address
 
@@ -51,5 +54,11 @@ class ServiceJob < ApplicationRecord
     invoice ||= Invoice.create
     update(invoice: invoice)
     invoice
+  end
+
+  private
+
+  def set_serviced_at
+    self.serviced_at ||= Time.current
   end
 end
