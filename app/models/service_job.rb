@@ -23,11 +23,11 @@ class ServiceJob < ApplicationRecord
 
   def self.default_services
     {
-      "Mowing"             => 25,
-      "Weeding"            => 20,
-      "Hedging"            => 20,
-      "Tree/shrub removal" => 20,
-      "Clean up"           => 20
+      "Mowing"        => 30,
+      "Weeding"       => 30,
+      "Hedging"       => 25,
+      "Shrub removal" => 25,
+      "Clean up"      => 20
     }
   end
 

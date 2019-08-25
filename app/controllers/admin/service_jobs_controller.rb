@@ -16,7 +16,7 @@ class Admin::ServiceJobsController < Admin::BaseController
   def create
     if @service_job.save
       @service_address.serviced!
-      redirect_to [:admin, :service_addresses], notice: "Job complete. 👍"
+      redirect_to [:admin, :service_jobs], notice: "Job complete. 👍"
     else
       flash.now[:alert] = "Failed to save. Please try again."
       render :form
