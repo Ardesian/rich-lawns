@@ -33,6 +33,17 @@
             Last Service:
             <strong><%= service_address.last_service&.to_formatted_s(:simple) || "Never Serviced" %></strong>
           </small>
+
+          <% if service_address.user.present? %>
+            <span class="hidden searchable"><%= service_address.user.name %></span>
+            <span class="hidden searchable"><%= service_address.user.email %></span>
+            <span class="hidden searchable"><%= service_address.user.phone %></span>
+            <small>
+              <%= service_address.user.name %> <br>
+              <%= service_address.user.email %> <br>
+              <%= service_address.user.phone %> <br>
+            </small>
+          <% end %>
           <!-- <p>Notes</p> -->
         <% end %>
       <% end %>
