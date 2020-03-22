@@ -24,8 +24,9 @@ class UserMailer < ApplicationMailer
   end
 
   def invoice(invoice)
-    @title = "Thank you for using our services!"
+    @title = "Rich Lawns & Demo"
     @invoice = invoice
+    @service_address = invoice.service_jobs.first.try(:service_address)
 
     mail(
       to: @invoice.recipient,

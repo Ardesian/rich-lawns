@@ -1,1 +1,15 @@
+<div class="content-label">Thanks for using our services!</div>
+
+<% if @service_address.present? %>
+  <%= content_tag :div, class: :cell do %>
+    <%= content_tag :h3, @service_address.name if @service_address.name.present? %>
+    <%= content_tag :p, @service_address.address if @service_address.address.present? %>
+    <small>
+      <%= @service_address.frequency.titleize %> <br>
+      Last Service:
+      <strong><%= @service_address.last_service&.to_formatted_s(:simple) || "Never Serviced" %></strong>
+    </small>
+  <% end %>
+<% end %>
+
 <%= render partial: "admin/service_jobs/invoice_table", locals: { invoice: @invoice } %>
