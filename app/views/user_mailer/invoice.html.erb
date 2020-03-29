@@ -1,6 +1,6 @@
 <div class="content-label">Thanks for using our services!</div>
 
-<% if @service_address.present? %>
+<% if false && @service_address.present? %>
   <%= content_tag :div, class: :cell do %>
     <%= content_tag :h3, @service_address.name if @service_address.name.present? %>
     <%= content_tag :p, @service_address.address if @service_address.address.present? %>
