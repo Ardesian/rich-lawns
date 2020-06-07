@@ -2,12 +2,12 @@
 <div class="inline-fields">
   <div class="form-field">
     <%= hidden_field_tag "service_job[service_items_attributes][][id]", item.id %>
-    <%= text_field_tag "service_job[service_items_attributes][][description]", item.description, placeholder: "Other", class: "other-field" %>
+    <%= text_field_tag "service_job[service_items_attributes][][description]", item.description, placeholder: "Other", class: "other-field", autocomplete: false %>
   </div>
   <div class="form-field small-field">
-    <%= text_field_tag "service_job[service_items_attributes][][unit_count]", item.unit_count, placeholder: "#units"  %>
+    <%= text_field_tag "service_job[service_items_attributes][][unit_count]", item.unit_count, placeholder: "#units", autocomplete: false %>
   </div>
   <div class="form-field" data-fa="money" data-after="/unit">
-    <%= text_field_tag "service_job[service_items_attributes][][unit_cost_in_dollars]", item.unit_cost_in_dollars %>
+    <%= text_field_tag "service_job[service_items_attributes][][unit_cost_in_dollars]", item.unit_cost_in_dollars, autocomplete: false %>
   </div>
 </div>

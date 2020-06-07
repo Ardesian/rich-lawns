@@ -36,7 +36,7 @@ class ServiceAddress < ApplicationRecord
     # annually:      9
   }
 
-  defaults frequency: :weekly
+  defaults frequency: :by_request_only
 
   def self.select_frequencies
     frequencies.keys.map do |frequency|
