@@ -34,11 +34,13 @@
 
       <div class="content-label">Billing</div>
       <%= content_tag :div, class: :cell do %>
-        <%= form_for [:admin, @service_job] do |f| %>
+        <%= form_for [:admin, @service_job], html: { autocomplete: :off } do |f| %>
           <%= hidden_field_tag :service_address_token, @service_address.token %>
           <%= render partial: "layouts/error_container", locals: { resource: @service_job } %>
 
           <%= render partial: "admin/service_items/index", locals: { service_job: @service_job } %>
+
+          <%= render partial: "admin/service_items/total_row" %>
 
           <%= f.text_area :notes, placeholder: "Additional notes for service done" %>
           <div class="text-center">
