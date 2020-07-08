@@ -21,6 +21,10 @@ class ServiceJob < ApplicationRecord
   before_save :set_serviced_at
 
   delegate :user, to: :service_address
+  delegate :sent?, to: :invoice, allow_nil: true
+  delegate :paid?, to: :invoice, allow_nil: true
+  delegate :sent_to_email, to: :invoice, allow_nil: true
+  delegate :sent_at, to: :invoice, allow_nil: true
 
   accepts_nested_attributes_for :service_items, allow_destroy: true
 
