@@ -37,7 +37,7 @@
         <% else %>
           <h3>Client not added yet.</h3>
         <% end %>
-        <% if @invoice.sent? %>
+        <% if @invoice.try(:sent?) %>
           <small>Invoice sent to: <%= @invoice.sent_to_email %> <%= @invoice.sent_at&.to_formatted_s(:simple_with_time) %></small> <br>
         <% end %>
         <% if @invoice.try(:paid?) %>
