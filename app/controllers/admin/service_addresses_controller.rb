@@ -2,7 +2,7 @@ class Admin::ServiceAddressesController < Admin::BaseController
   before_action :set_service_address
 
   def index
-    @service_addresses = ServiceAddress.current.order(last_service: :desc, id: :desc)
+    @service_addresses = ServiceAddress.current.order("last_service DESC NULLS LAST, ID DESC")
 
 
     respond_to do |format|
@@ -57,6 +57,7 @@ class Admin::ServiceAddressesController < Admin::BaseController
   def service_address_params
     params.require(:service_address).permit(
       :name,
+      :default_email,
       :address,
       :city,
       :zip,

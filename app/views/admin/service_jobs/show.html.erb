@@ -27,6 +27,8 @@
             </p>
           <% end %>
         </small>
+        <br>
+        <%= link_to "New Service", [:new, :admin, :service_job, service_address_token: @service_address], class: "btn float-rights" %>
       <% end %>
 
       <div class="content-label">Billing Details</div>
@@ -51,7 +53,7 @@
 
           <%= form_tag [:deliver_invoice, :admin, @service_job] do %>
             <small>Email to deliver invoice to:</small>
-            <%= text_field_tag :invoice_recipient, @service_job.invoice.try(:recipient) || @service_job.user.try(:email) %>
+            <%= text_field_tag :invoice_recipient, @service_job.recipient %>
             <%= submit_tag "Deliver Invoice" %>
           <% end %>
         <% end %>

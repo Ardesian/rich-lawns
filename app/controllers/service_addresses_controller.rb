@@ -42,6 +42,7 @@ class ServiceAddressesController < ApplicationController
   def service_address_params
     params.require(:service_address).permit(
       :name,
+      :default_email,
       :address,
       :city,
       :zip,

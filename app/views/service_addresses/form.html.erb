@@ -8,6 +8,11 @@
         <div class="cell">
 
           <div class="form-field">
+            <%= f.label :default_email, "Invoice Email (optional)" %>
+            <%= f.text_field :default_email %>
+          </div>
+
+          <div class="form-field">
             <%= f.label :address, "Street Address" %>
             <%= f.text_field :address, data: parsley(:required) %>
           </div>

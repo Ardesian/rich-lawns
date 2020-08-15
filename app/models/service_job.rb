@@ -34,7 +34,7 @@ class ServiceJob < ApplicationRecord
       "Weeding"       => 30,
       "Hedging"       => 25,
       "Shrub removal" => 25,
-      "Clean up"      => 20
+      "Clean up"      => 25
     }
   end
 
@@ -43,6 +43,12 @@ class ServiceJob < ApplicationRecord
   end
   delegate :default_services, to: :class
   delegate :default_service_item_names, to: :class
+
+  def recipient
+    invoice.try(:recipient).presence ||
+      service_address.default_email.presence ||
+      user.try(:email)
+  end
 
   def cost_in_pennies
     service_items.sum(:cost_in_pennies)

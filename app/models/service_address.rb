@@ -2,18 +2,19 @@
 #
 # Table name: service_addresses
 #
-#  id           :bigint           not null, primary key
-#  token        :string
-#  user_id      :bigint
-#  name         :string
-#  address      :string
-#  city         :string
-#  zip          :string
-#  frequency    :integer
-#  last_service :datetime
-#  removed_at   :datetime
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
+#  id            :bigint           not null, primary key
+#  token         :string
+#  user_id       :bigint
+#  name          :string
+#  address       :string
+#  city          :string
+#  zip           :string
+#  frequency     :integer
+#  last_service  :datetime
+#  removed_at    :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  default_email :string
 #
 
 class ServiceAddress < ApplicationRecord

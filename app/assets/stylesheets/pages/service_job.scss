@@ -1,10 +1,14 @@
 .form-field.small-field {
   width: 100px;
 }
+
 .form-field[data-fa] {
   width: 150px;
 
-  input { padding-left: 25px; }
+  input {
+    padding-left: 25px;
+  }
+
   &:before {
     position: absolute;
     top: 50%;
@@ -15,9 +19,16 @@
     font-family: "Font Awesome\ 5 Free";
     content: "";
   }
-  &[data-fa=clock]:before { content: "\f017"; }
-  &[data-fa=money]:before { content: "\f155"; }
+
+  &[data-fa=clock]:before {
+    content: "\f017";
+  }
+
+  &[data-fa=money]:before {
+    content: "\f155";
+  }
 }
+
 .form-field[data-after] {
   &:after {
     position: absolute;
