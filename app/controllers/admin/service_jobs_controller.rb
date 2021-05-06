@@ -38,6 +38,7 @@ class Admin::ServiceJobsController < Admin::BaseController
 
     if @invoice.recipient.present?
       UserMailer.invoice(@invoice).deliver_later
+      notify_invoice_delivery
       flash.notice = "Delivered invoice. 📧"
     else
       flash.alert = "Could not deliver invoice without email."
@@ -69,6 +70,13 @@ class Admin::ServiceJobsController < Admin::BaseController
   end
 
   private
+
+  def notify_invoice_delivery
+    to = @invoice.sent_to_email
+    url = Rails.application.routes.url_helpers.admin_service_job_url @service_job
+
+    SlackNotifier.notify("*Invoice Sent to #{to}!*\n<#{url}|Click here to view>")
+  end
 
   def adjusted_service_job_params
     return unless params[:service_job].present?
