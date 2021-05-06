@@ -34,11 +34,13 @@
 
       <div class="content-label">Billing</div>
       <%= content_tag :div, class: :cell do %>
-        <%= form_for [:admin, @service_job] do |f| %>
+        <%= form_for [:admin, @service_job], html: { autocomplete: :off } do |f| %>
           <%= hidden_field_tag :service_address_token, @service_address.token %>
           <%= render partial: "layouts/error_container", locals: { resource: @service_job } %>
 
           <%= render partial: "admin/service_items/index", locals: { service_job: @service_job } %>
+
+          <%= render partial: "admin/service_items/total_row" %>
 
           <%= f.text_area :notes, placeholder: "Additional notes for service done" %>
           <div class="text-center">
@@ -47,11 +49,25 @@
         <% end %>
       <% end %>
 
-      <div class="cell text-center">
-        <% if @service_job.persisted? %>
-          <%= link_to "Delete", [:admin, @service_job], class: "btn danger", method: :delete, data: { confirm: "Are you sure you want to delete this job?" } %>
+      <div class="content-label">Service History</div>
+      <%= content_tag :div, class: :cell do %>
+        <% jobs = @service_address.service_jobs.where.not(id: nil).order(created_at: :desc) %>
+        <% last_idx = jobs.length - 1 %>
+        <% jobs.each_with_index do |service_job, idx| %>
+          <% next if service_job.id.nil? %>
+
+          <%= link_to [:admin, service_job], class: :cell do %>
+            <%= render partial: "show", locals: { service_job: service_job } %>
+          <% end %>
+          <%= content_tag :hr if idx < last_idx %>
         <% end %>
-      </div>
+      <% end %>
+
+      <% if @service_job.persisted? %>
+        <div class="cell text-center">
+          <%= link_to "Delete", [:admin, @service_job], class: "btn danger", method: :delete, data: { confirm: "Are you sure you want to delete this job?" } %>
+        </div>
+      <% end %>
 
     </div>
   </div>

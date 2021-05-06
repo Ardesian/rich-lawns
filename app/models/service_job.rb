@@ -21,6 +21,10 @@ class ServiceJob < ApplicationRecord
   before_save :set_serviced_at
 
   delegate :user, to: :service_address
+  delegate :sent?, to: :invoice, allow_nil: true
+  delegate :paid?, to: :invoice, allow_nil: true
+  delegate :sent_to_email, to: :invoice, allow_nil: true
+  delegate :sent_at, to: :invoice, allow_nil: true
 
   accepts_nested_attributes_for :service_items, allow_destroy: true
 
@@ -30,7 +34,7 @@ class ServiceJob < ApplicationRecord
       "Weeding"       => 30,
       "Hedging"       => 25,
       "Shrub removal" => 25,
-      "Clean up"      => 20
+      "Clean up"      => 25
     }
   end
 
@@ -39,6 +43,12 @@ class ServiceJob < ApplicationRecord
   end
   delegate :default_services, to: :class
   delegate :default_service_item_names, to: :class
+
+  def recipient
+    invoice.try(:recipient).presence ||
+      service_address.default_email.presence ||
+      user.try(:email)
+  end
 
   def cost_in_pennies
     service_items.sum(:cost_in_pennies)

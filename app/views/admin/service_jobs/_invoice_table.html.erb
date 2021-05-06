@@ -15,6 +15,9 @@
     td.no-border {
       border: none;
     }
+    note {
+      white-space: pre-wrap;
+    }
   </style>
 <% end %>
 
@@ -24,7 +27,7 @@
 <% if notes.any? %>
   <div class="cell">
     <% notes.each do |note| %>
-      <p><%= note %></p>
+      <note><%= note %></note>
     <% end %>
   </div>
 <% end %>

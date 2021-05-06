@@ -1,13 +1,16 @@
 <% item ||= ServiceItem.new %>
-<div class="inline-fields">
+<div class="inline-fields item-fields">
   <div class="form-field">
     <%= hidden_field_tag "service_job[service_items_attributes][][id]", item.id %>
-    <%= text_field_tag "service_job[service_items_attributes][][description]", item.description, placeholder: "Other", class: "other-field" %>
+    <%= text_field_tag "service_job[service_items_attributes][][description]", item.description, placeholder: "Other", class: "other-field", autocomplete: :off %>
   </div>
   <div class="form-field small-field">
-    <%= text_field_tag "service_job[service_items_attributes][][unit_count]", item.unit_count, placeholder: "#units"  %>
+    <%= text_field_tag "service_job[service_items_attributes][][unit_count]", item.unit_count, placeholder: "#units", class: "unit-field", autocomplete: :off %>
   </div>
   <div class="form-field" data-fa="money" data-after="/unit">
-    <%= text_field_tag "service_job[service_items_attributes][][unit_cost_in_dollars]", item.unit_cost_in_dollars %>
+    <%= text_field_tag "service_job[service_items_attributes][][unit_cost_in_dollars]", item.unit_cost_in_dollars, autocomplete: :off, class: "cost-field" %>
+  </div>
+  <div class="form-field" data-fa="money">
+    <%= text_field_tag "total", "--", readonly: true, class: "total-row" %>
   </div>
 </div>

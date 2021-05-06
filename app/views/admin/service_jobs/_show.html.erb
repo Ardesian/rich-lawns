@@ -1,0 +1,27 @@
+<small>
+  <p>
+    Date:
+    <strong><%= service_job.created_at.local.to_formatted_s(:simple_with_time) %></strong>
+  </p>
+  <p>
+    Amount:
+    <strong><%= number_to_currency(service_job.cost_in_dollars) || "N/A" %></strong>
+  </p>
+  <% if service_job.sent? %>
+    <p>
+      Invoice sent:
+      <strong><%= service_job.sent_to_email %> <%= service_job.sent_at&.to_formatted_s(:simple_with_time) %></strong>
+    </p>
+  <% end %>
+  <% if service_job.notes.present? %>
+    <p>
+      Notes:
+      <note><%= service_job.notes %></note>
+    </p>
+  <% end %>
+  <% if service_job.paid? %>
+    <strong class="success">PAID</strong>
+  <% else %>
+    <strong class="danger">UNPAID</strong>
+  <% end %>
+</small>

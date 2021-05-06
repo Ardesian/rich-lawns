@@ -20,6 +20,10 @@ class Invoice < ApplicationRecord
   has_many :service_jobs
   has_many :service_items, through: :service_jobs
 
+  def sent?
+    sent_to_email.present?
+  end
+
   def cost_in_pennies
     service_items.sum(:cost_in_pennies)
   end
