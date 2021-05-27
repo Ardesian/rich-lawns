@@ -1,0 +1,49 @@
+<div class="skinny-container">
+  <div class="central-container">
+    <div class="container-title">Invoice</div>
+    <div class="content">
+      <div class="btn-spread">
+        <%= link_to "Back", :account, class: :btn %>
+      </div>
+
+      <div class="content-label">Address</div>
+      <%= content_tag :div, class: :cell do %>
+        <% @invoice.service_jobs.each do |service_job| %>
+          <% service_address = service_job.service_address %>
+
+          <h3><%= service_address.name.presence || service_address.address %></h3>
+        <% end %>
+        <br>
+      <% end %>
+
+      <div class="content-label">Payment</div>
+      <%= link_to @stripe_card.present? ? stripe_cards_path : new_stripe_card_path, class: :cell do %>
+        <% if @stripe_card.present? %>
+          <% if @stripe_card.name.present? %>
+            <h3><%= @stripe_card.name %></h3>
+          <% end %>
+          <i class="fa fa-credit-card"></i>
+          <strong><%= @stripe_card.last_4 %> | <%= @stripe_card.exp_month %>/<%= @stripe_card.exp_year %></strong>
+          <br>
+          <small>Click to change default card</small>
+          <% if @stripe_card.customer_error.present? %>
+            <p class="danger">Failed to charge card: <br><%= @stripe_card.customer_error %></p>
+          <% end %>
+        <% else %>
+          <i>No payment information added. Click to add.</i>
+        <% end %>
+      <% end %>
+
+      <div class="btn-spread text-center">
+        <% if @stripe_card.present? %>
+          <%= link_to "Pay with #{@stripe_card.name.presence || 'default card'}", charges_path(invoice: @invoice), method: :post, class: :btn, data: { confirm: "By confirming, you authorize Rich Lawns, LLC to charge $#{@invoice.cost_in_dollars} to the card ending in #{@stripe_card.last_4}." }  %>
+        <% else %>
+          <%= link_to "Add payment information", new_stripe_card_path, class: "btn" %>
+        <% end %>
+      </div>
+
+      <div class="content-label">Breakdown</div>
+      <%= render partial: "admin/service_jobs/invoice_table", locals: { invoice: @invoice } %>
+    </div>
+  </div>
+</div>

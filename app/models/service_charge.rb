@@ -17,7 +17,7 @@
 #
 #   belongs_to :user
 #   belongs_to :service_address
-#   belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending
+#   belongs_to :stripe_charge, optional: true # When nil, charge failed/is pending
 #
 #   delegate :cost_in_dollars, to: :stripe_charge, allow_nil: true
 #

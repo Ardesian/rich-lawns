@@ -1,3 +1,4 @@
+<% user_facing ||= false %>
 <small>
   <p>
     Date:
@@ -7,7 +8,7 @@
     Amount:
     <strong><%= number_to_currency(service_job.cost_in_dollars) || "N/A" %></strong>
   </p>
-  <% if service_job.sent? %>
+  <% if service_job.sent? && !user_facing %>
     <p>
       Invoice sent:
       <strong><%= service_job.sent_to_email %> <%= service_job.sent_at&.to_formatted_s(:simple_with_time) %></strong>

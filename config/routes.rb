@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     unlocks: "devise/user/unlocks"
   }
   resource :account, controller: :account, only: [ :show, :edit, :update ]
+  resources :invoices, only: :show
+  resources :charges, only: :create
 
   get :flash_message, controller: :application
 end

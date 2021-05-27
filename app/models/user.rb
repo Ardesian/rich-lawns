@@ -31,6 +31,10 @@ class User < ApplicationRecord
 
   after_create :ping_slack
 
+  def invoices_by_email
+    Invoice.where("invoices.sent_to_email ILIKE ?", email)
+  end
+
   def default_payment_card
     stripe_cards.current.default.first
   end

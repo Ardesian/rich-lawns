@@ -14,9 +14,10 @@
 #
 
 class Invoice < ApplicationRecord
+  include Tokenable
   include Dollarable
   belongs_to :user, optional: true # Want Rich to be able to send these to guests
-  belongs_to :stripe_charge, optional: true # If nil, charge failed/is pending
+  belongs_to :stripe_charge, optional: true # When nil, charge failed/is pending
   has_many :service_jobs
   has_many :service_items, through: :service_jobs
 

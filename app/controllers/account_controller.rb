@@ -4,6 +4,7 @@ class AccountController < ApplicationController
   def show
     @service_addresses = current_user.service_addresses.current.order(:id)
     @stripe_card = current_user.default_payment_card
+    @invoices = current_user.invoices_by_email.order(created_at: :desc)
   end
 
   def edit
