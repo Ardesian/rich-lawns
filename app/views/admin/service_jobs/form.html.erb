@@ -38,11 +38,12 @@
           <%= hidden_field_tag :service_address_token, @service_address.token %>
           <%= render partial: "layouts/error_container", locals: { resource: @service_job } %>
 
+          <%= f.text_area :notes, rows: 5, placeholder: "Additional notes for service done" %>
+
           <%= render partial: "admin/service_items/index", locals: { service_job: @service_job } %>
 
           <%= render partial: "admin/service_items/total_row" %>
 
-          <%= f.text_area :notes, placeholder: "Additional notes for service done" %>
           <div class="text-center">
             <%= f.submit "Submit Service" %>
           </div>

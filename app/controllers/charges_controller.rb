@@ -8,6 +8,7 @@ class ChargesController < ApplicationController
 
     if charge.success?
       @invoice.mark_paid
+      SlackNotifier.notify("Invoice successfully paid. #{@invoice.token}", channel: '#rich-lawns', username: 'Cash-Bot', icon_emoji: ":money_with_wings:")
 
       redirect_to :account, notice: "Invoice paid successfully. Thank you!"
     else

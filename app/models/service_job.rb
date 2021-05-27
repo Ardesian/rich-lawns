@@ -66,6 +66,12 @@ class ServiceJob < ApplicationRecord
     invoice
   end
 
+  def notes
+    return super unless super.nil?
+
+    "Make checks payable to:\nRich Lawns\n709 W Jefferson Lane, Sandy UT 84070\nor Venmo @rich-lawns"
+  end
+
   private
 
   def set_serviced_at
