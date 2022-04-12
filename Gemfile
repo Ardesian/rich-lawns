@@ -91,7 +91,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gem 'touchpunch-rails'
 # gem 'bcrypt'
 # gem 'rails_autolink'
-gem 'nokogiri', "~> 1.10.4"
+gem 'nokogiri', "~> 1.13.4"
 # gem 'capybara'
 # gem 'poltergeist'
 # gem 'launchy'
