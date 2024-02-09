@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     # confirmations: "devise/user/confirmations",
     # omniauth_callbacks: "devise/user/omniauth_callbacks",
     passwords: "devise/user/passwords",
-    # registrations: "devise/user/registrations",
+    registrations: "devise/user/registrations",
     sessions: "devise/user/sessions",
     unlocks: "devise/user/unlocks"
   }
