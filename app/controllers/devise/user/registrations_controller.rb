@@ -5,9 +5,10 @@ class Devise::User::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+    render :shh
+  end
 
   # POST /resource
   # def create
