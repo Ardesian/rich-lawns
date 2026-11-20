@@ -25,6 +25,7 @@ class CustomLogger
         LogTracker.create({
           user_agent: request.user_agent,
           ip_address: request.try(:remote_ip),
+          ip_count: IpVisit.record!(request.try(:remote_ip)),
           http_method: request.env["REQUEST_METHOD"],
           url: request.env["REQUEST_PATH"],
           params: filtered_params,

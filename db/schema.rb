@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_174154) do
+ActiveRecord::Schema.define(version: 2026_11_20_180200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,17 @@ ActiveRecord::Schema.define(version: 2020_08_15_174154) do
     t.index ["user_id"], name: "index_invoices_on_user_id"
   end
 
+  create_table "ip_visits", force: :cascade do |t|
+    t.string "ip_address", null: false
+    t.integer "visit_count", default: 0, null: false
+    t.datetime "first_seen_at"
+    t.datetime "last_seen_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ip_address"], name: "index_ip_visits_on_ip_address", unique: true
+    t.index ["visit_count", "last_seen_at"], name: "index_ip_visits_on_visit_count_and_last_seen_at"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "ip"
     t.string "country_code"
@@ -72,6 +83,8 @@ ActiveRecord::Schema.define(version: 2020_08_15_174154) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_log_trackers_on_created_at"
+    t.index ["ip_address"], name: "index_log_trackers_on_ip_address"
     t.index ["location_id"], name: "index_log_trackers_on_location_id"
     t.index ["user_id"], name: "index_log_trackers_on_user_id"
   end
